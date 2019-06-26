@@ -33,3 +33,6 @@
 [2013-09-11 17:10:49.548] [IP: /192.168.2.108] [LOGOUT] Logging out user "1" succeeded; Session length: < 1  Minutes
 [2013-09-11 17:35:46.724] [IP: /192.168.2.108] [LOGIN] Logging in user "1" succeeded
 [2013-09-11 17:35:58.924] [IP: /192.168.2.125] [LOGIN] Logging in user "2" succeeded
+[2019-06-26 23:36:06.254] [IP: /192.168.178.20] [REGISTER] Registering user "SP1" succeeded
+[2019-06-26 23:36:10.232] [IP: /192.168.178.20] [LOGIN] Logging in user "SP1" succeeded
+[2019-06-26 23:37:09.596] [IP: /192.168.178.20] [REGISTER] Registering user "SP2" succeeded
