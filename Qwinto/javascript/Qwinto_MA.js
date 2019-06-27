@@ -114,7 +114,6 @@ function closeGame () {
 	sendDataToServer ("CLOSE");
 }
 
-// W�rfel w�hlen
 
 
 
@@ -144,7 +143,75 @@ function roll_dice () {
 	diceValue=Dice1Value+Dice2Value+Dice3Value;
 }
 
+// Würfel wählen
+
+function select_dice(){
+	var isRedDie_checked = document.getElementById("wuerfel_rot").checked;
+	var isYellowDie_checked = document.getElementById("wuerfel_gelb").checked;
+	var isPurpleDie_checked = document.getElementById("wuerfel_lila").checked;
+	console.log(isRedDie_checked);
+	console.log(isYellowDie_checked);
+	console.log(isPurpleDie_checked);
+	
+}
+
+//Würfel-Counter
+
+var try_count = 0;
+
+// Würfelfunktion
+
+function dice_roll() {
+	//Würfelauswahl
+//	var redDie = false;
+//	var yellowDie = false;
+//	var purpleDie = false;
+	
+	var redDie_value = 0;
+	var yellowDie_value = 0;
+	var purpleDie_value = 0;
+	
+	var sum_dice = 0;
+	
+	//Augenzahlen der Würfel
+	if(try_count == 0 || try_count == 1){
+		
+		if (redDie == true) {
+			redDie_value = (int)(Math.random() * 6) + 1; 
+		} else {
+			redDie_value = 0;
+		}
+		if (yellowDie == true) {
+			yellowDie_value = (int)(Math.random() * 6) + 1; 
+		} else {
+			yellowDie_value = 0;
+		}
+		if (purpleDie == true) {
+			purpleDie_value = (int)(Math.random() * 6) + 1; 
+		} else {
+			purpleDie_value = 0;
+		}
+		try_count += 1;
+		//Summe der Würfel
+		var sum_dice = redDie_value + yellowDie_value + purpleDie_value;
+		
+	} else {
+		alert('Du kannst nicht noch einmal würfeln!');
+	}
+	
+	
+}
+
 // 2. Wurf
+
+function secondTry() {
+	if (try_count == 1){
+		//TODO:Würfel resetten
+		
+		dice_roll();
+	}
+	
+}
 
 // Eingabe Best�tigen
 
