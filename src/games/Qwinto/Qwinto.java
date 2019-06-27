@@ -72,7 +72,26 @@ public class Qwinto extends Game {
 	@Override
 	public void execute(User user, String s) {
 		// TODO Auto-generated method stub
+		if(this.gState==GameState.CLOSED) return;
+		if(s.equals("CLOSE")){
+			sendGameDataToClients("CLOSE");
+			closeGame();
+			return;
+		}
 		
+		if (s.equals("RESTART")) {
+			if (playerList.size() != 2) return;
+			setGridStatus(new int[9]);
+			turnCounter = 0;
+			this.gState = GameState.RUNNING;
+			sendGameDataToClients("standardEvent");
+			return;
+		}
+		if (gState != GameState.RUNNING)
+			return;
+		if (!user.equals(playerTurn)) {
+			return;
+		}
 	}
 	
 	private void setGridStatus(int[] gridStatus) {
@@ -164,6 +183,7 @@ public class Qwinto extends Game {
 
 		if (this.gState == GameState.FINISHED) {
 			if (turnCounter == 27 && !gameOver()){
+				//Punkte auswertung
 				gameData += "Unentschieden!";
 				gameData += isHost(user);
 				return gameData;
@@ -172,9 +192,15 @@ public class Qwinto extends Game {
 				gameData += "Du hast verloren!";
 			} else
 				gameData += "Du hast gewonnen!";
+		}else if (playerTurn.equals(user)) {
+			gameData += "Du bist dran!";
+		} else {
+			gameData += playerTurn.getName() + " ist dran!";
 		}
-		//TODO
-		return null;
+		
+		gameData += isHost(user);
+
+		return gameData;
 	}
 	@Override
 	public GameState getGameState() {
@@ -182,8 +208,43 @@ public class Qwinto extends Game {
 	}
 
 	public boolean gameOver() {
-		//TODO
-		return false;
+		boolean end=false;
+		int[] grid = getGridStatus();
+		// Wenn Orangefarbene und gelbe Zeile voll ist
+		for(int i=0; grid[i]!=0 && i<9;i++) {
+			for(int j=9; grid[j]!=0 && j<18;j++) {
+				if(j==17) {
+				end=true;
+				}
+			}
+		}
+		// Wenn Gelbfarbene und lila Zeile voll ist
+		for(int i=0; grid[i]!=0 && i<9;i++) {
+			for(int j=18; grid[j]!=0 && j<27;j++) {
+				if(j==26) {
+				end=true;
+				}
+			}
+		}
+		// Wenn Orangefarbene und lila Zeile voll ist
+		for(int i=9; grid[i]!=0 && i<18;i++) {
+			for(int j=18; grid[j]!=0 && j<27;j++) {
+				if(j==26) {
+				end=true;
+				}
+			}
+		}
+
+		// Wenn Fehlerwurf Zeile voll ist
+		for(int i=27; grid[i]!=0 && i<31;i++) {	
+				if(i==30) {
+				end=true;
+				}
+			
+		}
+		
+		
+		return end;
 	}
 	
 	private String isHost(User user) {

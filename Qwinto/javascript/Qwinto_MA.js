@@ -7,8 +7,11 @@ var sentFields = [0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0
 var currentPlayer = 0;
 var diceValue = 0;
 var Dice1 = true;
+var Dice1Value = 0;
 var Dice2 = true;
+var Dice2Value = 0;
 var Dice3 = true;
+var Dice3Value = 0;
 var xImg = "/Qwinto/images/x.jpg";
 var 1Img = "/Qwinto/images/x.jpg";
 
@@ -82,7 +85,7 @@ function updateGameState () {
 	sendDataToServer (sentFields);
 }
 
-// Feld zurücksetzen
+// Feld zurï¿½cksetzen
 
 function redraw () {
 	for ( var i = 0; i < 41; i++) {
@@ -105,27 +108,45 @@ function setVisible () {
 	document.getElementById ("closeButton").style.visibility = "visible";
 }
 
-// Spiel Schließen
+// Spiel Schlieï¿½en
 
 function closeGame () {
 	sendDataToServer ("CLOSE");
 }
 
-// Würfel wählen
+// Wï¿½rfel wï¿½hlen
 
 
 
-// Würfeln
+// Wï¿½rfeln
 
 function roll_dice () {
-	if (Dice1 && Dice2 && Dice3) {
-		
+	if (Dice1 && !Dice2 && !Dice3) {
+		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	}else if (Dice1 && Dice2 && !Dice3) {
+		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	}else if (Dice1 && !Dice2 && Dice3) {
+		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	}else if (!Dice1 && Dice2 && !Dice3) {
+		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	}else if (!Dice1 && Dice2 && Dice3) {
+		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	}else if (!Dice1 && !Dice2 && Dice3) {
+		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+	}else if (Dice1 && Dice2 && Dice3) {
+		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 	}
+	diceValue=Dice1Value+Dice2Value+Dice3Value;
 }
 
 // 2. Wurf
 
-// Eingabe Bestätigen
+// Eingabe Bestï¿½tigen
 
 function confirmInput () {
 	sendDataToServer ("CONFIRM");
