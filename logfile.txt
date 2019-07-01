@@ -36,3 +36,6 @@
 [2019-06-26 23:36:06.254] [IP: /192.168.178.20] [REGISTER] Registering user "SP1" succeeded
 [2019-06-26 23:36:10.232] [IP: /192.168.178.20] [LOGIN] Logging in user "SP1" succeeded
 [2019-06-26 23:37:09.596] [IP: /192.168.178.20] [REGISTER] Registering user "SP2" succeeded
+[2019-07-02 00:25:34.022] [IP: /0:0:0:0:0:0:0:1] [REGISTER] Registering user "test" succeeded
+[2019-07-02 00:25:43.799] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "test" succeeded
+[2019-07-02 00:26:34.14] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded

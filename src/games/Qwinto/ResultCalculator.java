@@ -10,12 +10,12 @@ import games.Qwinto.Network;
 
 public class ResultCalculator {
 	
-	public int calculateResult(Board board) {
+	/** public int calculateResult(Board board) {
 		//the result is a score
 		int score = 0;
 		
 		
-		ArrayList<Network> networks = findNetworks(board);
+		ArrayList<Network> networks ; //TODO  = findNetworks(board);
 		
 		for(Network n : networks) {
 			//get the error counter
@@ -24,16 +24,16 @@ public class ResultCalculator {
 			score -= errors;
 			
 			//find out, how many of the fields have been used
-			ArrayList<Field> usedFields = usedFields(networks);
+			// TODO ArrayList<Field> usedFields = usedFields(networks);
 			
-			score += usedFields.size();
+			//TODO score += usedFields.size();
 			
 		
 		return score;
-		}
+		} **/
 		
-
-		private ArrayList<Network> findNetworks(Board board) {
+		// TODO 
+		/** private ArrayList<Network> findNetworks(Board board) {
 			//the result is an ArrayList of networks
 			ArrayList<Network> networks = new ArrayList<Network>();
 			
@@ -63,6 +63,6 @@ public class ResultCalculator {
 			
 			//return the result
 			return networks;
-		}
-	}	
+		} **/
+	//}	
 }

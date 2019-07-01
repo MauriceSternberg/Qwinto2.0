@@ -176,7 +176,7 @@ public class Qwinto extends Game {
 		}
 		
 		if(playerList.size()<2){
-			gameData += "Warte Auf 2ten Spieler...";
+			gameData += "Warte auf 2ten Spieler...";
 			gameData += isHost(user);
 			return gameData;
 		}
