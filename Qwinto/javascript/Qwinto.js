@@ -12,8 +12,26 @@ var Dice2 = true;
 var Dice2Value = 0;
 var Dice3 = true;
 var Dice3Value = 0;
-var xImg = "/Qwinto/images/x.jpg";
-var 1Img = "/Qwinto/images/x.jpg";
+var xImg = "/Qwinto/images/x.png";
+var -Img = "/Qwinto/images/-.png";
+var 1Img = "/Qwinto/images/1.png";
+var 2Img = "/Qwinto/images/2.png";
+var 3Img = "/Qwinto/images/3.png";
+var 4Img = "/Qwinto/images/4.png";
+var 5Img = "/Qwinto/images/5.png";
+var 6Img = "/Qwinto/images/6.png";
+var 7Img = "/Qwinto/images/7.png";
+var 8Img = "/Qwinto/images/8.png";
+var 9Img = "/Qwinto/images/9.png";
+var 10Img = "/Qwinto/images/10.png";
+var 11Img = "/Qwinto/images/11.png";
+var 12Img = "/Qwinto/images/12.png";
+var 13Img = "/Qwinto/images/13.png";
+var 14Img = "/Qwinto/images/14.png";
+var 15Img = "/Qwinto/images/15.png";
+var 16Img = "/Qwinto/images/16.png";
+var 17Img = "/Qwinto/images/17.png";
+var 18Img = "/Qwinto/images/18.png";
 
 // Standard Event
 
