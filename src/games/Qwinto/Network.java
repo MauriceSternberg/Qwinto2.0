@@ -9,7 +9,7 @@ public class Network {
 	private ArrayList<Field> lineColor;
 	private ArrayList<Field> square;
 	private ArrayList<Field> pentagon;
-	private int errors;
+	private int fehlWürfe;
 	
 	public Network() {
 		//initiate the lists
@@ -17,18 +17,27 @@ public class Network {
 		this.lineColor = new ArrayList<Field>();
 		this.square = new ArrayList<Field>();
 		this.pentagon = new ArrayList<Field>();
-		this.errors = 0;
+		this.fehlWürfe = 0;
 	}
 	
 	
+	
+	public int getFehlWürfe() {
+		return fehlWürfe;
+	}
+
+
+
+	public void setFehlWürfe(int fehlWürfe) {
+		this.fehlWürfe = fehlWürfe;
+	}
+
+
+
 	public ArrayList<Field> getFields() {
 		return fields;
 	}
 
-
-	public int getErrors() {
-		return errors;
-	}
 
 	public ArrayList<Field> getLineColor() {
 		return lineColor;
@@ -43,8 +52,10 @@ public class Network {
 	public ArrayList<Field> getPentagon() {
 		return pentagon;
 	}
-
-	public void addError() {
-		this.errors++;
+	
+	public void addFehlWürfe() {
+		this.fehlWürfe++;
 	}
+
+	
 }

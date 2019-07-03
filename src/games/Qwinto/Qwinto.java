@@ -24,8 +24,21 @@ public class Qwinto extends Game {
 	private User playerTurn = null;
 	private ArrayList<User> playerList = new ArrayList<User>();
 	private ArrayList<User> spectatorList = new ArrayList<User>();
+	private ArrayList<Board> boardList = new ArrayList<Board>();
+	private ArrayList<Field> fields;
 	private int turnCounter = 0;
+
+	private int fehlWürfe = 0;
 	private String playerLeft = null;
+	
+	
+	public ArrayList<Board> getBoardList() {
+		return boardList;
+	}
+
+	public void setBoardList(ArrayList<Board> boardList) {
+		this.boardList = boardList;
+	}
 
 	@Override
 	public String getSite() {
@@ -70,28 +83,45 @@ public class Qwinto extends Game {
 	}
 
 	@Override
-	public void execute(User user, String s) {
+	public void execute(User user, String gsonString) {
 		// TODO Auto-generated method stub
-		if(this.gState==GameState.CLOSED) return;
-		if(s.equals("CLOSE")){
+		
+                if(this.gState==GameState.CLOSED) return;
+		
+		if(gsonString.equals("CLOSE")){
 			sendGameDataToClients("CLOSE");
 			closeGame();
 			return;
 		}
 		
-		if (s.equals("RESTART")) {
-			if (playerList.size() != 2) return;
-			setGridStatus(new int[9]);
-			turnCounter = 0;
-			this.gState = GameState.RUNNING;
-			sendGameDataToClients("standardEvent");
-			return;
+		if (gsonString.equals("RESTART")) {
+			
+			boardList.clear();
+			for(User u : playerList)
+			{
+				Board board = new Board(u);
+				board.initializeFields();
+				boardList.add(board);
+			}
+			
+			
+			//if there are as many players as allowed, start the game
+			if(playerList.size() == getMaxPlayerAmount() || playerList.size() >1) {
+				this.gState = GameState.RUNNING;
+				sendGameDataToClients("standardEvent");
+			}
+			
 		}
+		
 		if (gState != GameState.RUNNING)
 			return;
-		if (!user.equals(playerTurn)) {
+		else 
+		{
+			sendGameDataToUser(user, "WrongField");
 			return;
 		}
+			
+
 	}
 	
 	private void setGridStatus(int[] gridStatus) {
@@ -117,9 +147,52 @@ public class Qwinto extends Game {
 	@Override
 	public String getGameData(String eventName, User user) {
 		// TODO Auto-generated method stub
-		return null;
-	}
+		
+		String gameData = "";
+		if(eventName.equals("PLAYERLEFT")){
+			return playerLeft + " hat das Spiel verlassen!";
+		}
+		if(eventName.equals("CLOSE")){
+			return "CLOSE";
+		}
+		
+		ArrayList<Board> boardList  = getBoardList();
 
+		for (int i = 0; i < boardList.size(); i++) {
+			gameData += String.valueOf(boardList.get(i));
+			gameData += ',';
+		}
+		
+		if(playerList.size() < 2){
+			gameData += "Warte Auf 2ten Spieler...";
+			gameData += isHost(user);
+			return gameData;
+		}
+
+		if (this.gState == GameState.FINISHED) {
+			if (fehlWürfe == 4){
+				gameData += "Unentschieden!";
+				gameData += isHost(user);
+				return gameData;
+			}
+			
+			
+			//TODO Fall betrachten, wenn es nicht unentschieden ist
+		}
+
+
+		if (playerList.indexOf(user) == 0)
+			gameData += " (x)";
+		else
+			gameData += " (o)";
+		
+		gameData += isHost(user);
+
+		return gameData;
+		
+	}
+	
+	
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
