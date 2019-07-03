@@ -1,70 +1,189 @@
 <html>
  <head>
  	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
- 	<script src="javascript/Qwinto.js"></script>
+ 	<script src="javascript/Qwinto_MA.js"></script>
+	<script type="text/javascript">
+		function draw_spielfeld() {
+		  var c = document.getElementById("spielfeld_bg");
+		  var ctx = c.getContext("2d");
+		  var img = document.getElementById("spielfeld_img");
+		  ctx.drawImage(img,10,10);
+		}
+		function draw_number() {
+		  var c = document.getElementById("summe_wurf");
+		  var ctx = c.getContext("2d");
+		  var img = document.getElementById("18_img");
+		  ctx.drawImage(img,10,10);
+		}
+	</script>
+	
   <title>Qwinto - Spass fuer die ganze Familie</title>
  </head>
 
 <body>
-<!-- Image Map mit Koordinaten aller Felder -->
-<img src="images/spielfeld1.png" usemap="#qwinto-map">
+<!-- Buttons -->
+<p>
+<button onClick="draw_spielfeld()">Erstellen</button>
+<button onClick="draw_number()">18 Würfeln</button>
+<button onclick="roll_dice()">Würfeln</button>
+<button onclick="second_try()">2. Versuch</button>
+<button onclick="confirmInput">Eingabe bestätigen</button>
+</p>
 
-<map name="qwinto-map">
-    <area class="wuerfeln" target="" alt="button_wuerfeln" title="button_wuerfeln" href="" coords="803,723,982,652" shape="rect">
-    <area target="" alt="button_zweitversuch" title="button_zweitversuch" href="#" coords="802,810,982,739" shape="rect">
-    <area target="" alt="button_bestaetigung" title="button_bestaetigung" href="#" coords="1007,726,1188,651" shape="rect">
-    
-    <area target="" alt="wuerfel_rot" title="wuerfel_rot" id="wuerfel_rot" href="#" coords="43,755,123,676" shape="rect" onClick="select_dice();">
-    <area target="" alt="wuerfel_gelb" title="wuerfel_gelb" id="wuerfel_gelb" href="#" coords="145,756,225,676" shape="rect" onClick="select_dice();">
-    <area target="" alt="wuerfel_lila" title="wuerfel_lila" id="wuerfel_lila" href="#" coords="251,755,332,676" shape="rect" onClick="select_dice();">
-    <area target="" alt="wuerfel_summe" title="wuerfel_summe" coords="385,757,553,678" shape="rect">
-    
-    <area target="" alt="feld_lila1" title="feld_lila1" href="" coords="59,303,35" shape="circle">
-    <area target="" alt="feld_lila2" title="feld_lila2" href="" coords="155,304,35" shape="circle">
-    <area target="" alt="feld_lila3_bonus" title="feld_lila3_bonus" href="" coords="228,343,212,291,251,261,289,291,273,343" shape="poly">
-    <area target="" alt="feld_lila4" title="feld_lila4" href="" coords="347,303,36" shape="circle">
-    <area target="" alt="feld_lila5" title="feld_lila5" href="" coords="538,303,36" shape="circle">
-    <area target="" alt="feld_lila6" title="feld_lila6" href="" coords="634,304,36" shape="circle">
-    <area target="" alt="feld_lila7" title="feld_lila7" href="" coords="730,303,34" shape="circle">
-    <area target="" alt="feld_lila8" title="feld_lila8" href="" coords="826,303,37" shape="circle">
-    <area target="" alt="feld_lila9_bonus" title="feld_lila9_bonus" href="" coords="898,341,884,290,922,260,962,291,947,341" shape="poly">
-    
-    <area target="" alt="feld1_gelb" title="feld1_gelb" href="" coords="155,176,35" shape="circle">
-    <area target="" alt="feld2_gelb" title="feld2_gelb" href="" coords="250,176,36" shape="circle">
-    <area target="" alt="feld3_gelb" title="feld3_gelb" href="" coords="347,178,36" shape="circle">
-    <area target="" alt="feld4_gelb" title="feld4_gelb" href="" coords="442,178,36" shape="circle">
-    <area target="" alt="feld5_gelb" title="feld5_gelb" href="" coords="538,176,34" shape="circle">
-    <area target="" alt="feld6_gelb" title="feld6_gelb" href="" coords="730,177,35" shape="circle">
-    <area target="" alt="feld7_gelb_bonus" title="feld7_gelb_bonus" href="" coords="804,213,788,164,827,134,865,163,850,213" shape="poly">
-    <area target="" alt="feld8_gelb" title="feld8_gelb" href="" coords="922,177,35" shape="circle">
-    <area target="" alt="feld9_gelb" title="feld9_gelb" href="" coords="1018,178,35" shape="circle">
-    
-    <area target="" alt="feld1_rot" title="feld1_rot" href="" coords="251,55,35" shape="circle">
-    <area target="" alt="feld2_rot_bonus" title="feld2_rot_bonus" href="" coords="324,92,309,44,347,12,385,44,369,92" shape="poly">
-    <area target="" alt="feld3_rot" title="feld3_rot" href="" coords="443,55,34" shape="circle">
-    <area target="" alt="feld4_rot" title="feld4_rot" href="" coords="635,55,35" shape="circle">
-    <area target="" alt="feld5_rot_bonus" title="feld5_rot_bonus" href="" coords="707,92,692,43,731,12,770,42,756,92" shape="poly">
-    <area target="" alt="feld6_rot" title="feld6_rot" href="" coords="827,55,36" shape="circle">
-    <area target="" alt="feld7_rot" title="feld7_rot" href="" coords="923,55,34" shape="circle">
-    <area target="" alt="feld8_rot" title="feld8_rot" href="" coords="1019,56,35" shape="circle">
-    <area target="" alt="feld9_rot" title="feld9_rot" href="" coords="1115,56,35" shape="circle">
-    
-    <area target="" alt="fehlversuch1" title="fehlversuch1" href="" coords="438,479,519,399" shape="rect">
-    <area target="" alt="fehlversuch2" title="fehlversuch2" href="" coords="536,481,617,400" shape="rect">
-    <area target="" alt="fehlversuch3" title="fehlversuch3" href="" coords="633,480,714,399" shape="rect">
-    <area target="" alt="fehlversuch4" title="fehlversuch4" href="" coords="729,479,811,398" shape="rect">
-    
-    <area target="" alt="summe_rot" title="summe_rot" href="" coords="43,614,123,534" shape="rect">
-    <area target="" alt="summe_gelb" title="summe_gelb" href="" coords="145,615,226,533" shape="rect">
-    <area target="" alt="summe_lila" title="summe_lila" href="" coords="251,613,332,533" shape="rect">
-    <area target="" alt="summe_pentagon_rot1" title="summe_pentagon_rot1" href="" coords="399,610,385,560,423,529,460,559,445,610" shape="poly">
-    <area target="" alt="summe_pentagon_rot2" title="summe_pentagon_rot2" href="" coords="484,609,469,558,506,527,545,558,529,609" shape="poly">
-    <area target="" alt="summe_pentagon_gelb" title="summe_pentagon_gelb" href="" coords="567,608,554,559,591,528,631,558,615,608" shape="poly">
-    <area target="" alt="summe_pentagon_lila1" title="summe_pentagon_lila1" href="" coords="652,609,638,558,676,526,715,558,701,609" shape="poly">
-    <area target="" alt="summe_pentagon_lila2" title="summe_pentagon_lila2" href="" coords="737,609,723,559,760,527,801,558,786,609" shape="poly">
-    <area target="" alt="summe_fehlversuche" title="summe_fehlversuche" href="" coords="864,614,946,534" shape="rect">
-    <area target="" alt="summe_felder_gesamt" title="summe_felder_gesamt" href="" coords="992,613,1174,533" shape="rect">
-</map>
+<div style="position: relative;">
+
+   <!-- Spielfeld Hintergrund -->
+   <canvas id="spielfeld_bg" width="1220" height="840" 
+   style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+   
+   <!-- Rote Felder -->
+   <a href="#" onclick="draw_number()"><canvas id="rot1" width="75" height="75" 
+   style="position: absolute; left: 213; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot2" width="75" height="75" 
+   style="position: absolute; left: 309; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot3" width="75" height="75" 
+   style="position: absolute; left: 405; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot4" width="75" height="75" 
+   style="position: absolute; left: 597; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot5" width="75" height="75" 
+   style="position: absolute; left: 693; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot6" width="75" height="75" 
+   style="position: absolute; left: 789; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot7" width="75" height="75" 
+   style="position: absolute; left: 884; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot8" width="75" height="75" 
+   style="position: absolute; left: 980; top: 20; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="rot9" width="75" height="75" 
+   style="position: absolute; left: 1076; top: 20; z-index: 1;"></canvas></a>
+   
+   <!-- Gelbe Felder -->
+   <a href="#" onclick="draw_number()"><canvas id="gelb1" width="75" height="75" 
+   style="position: absolute; left: 117; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb2" width="75" height="75" 
+   style="position: absolute; left: 213; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb3" width="75" height="75" 
+   style="position: absolute; left: 309; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb4" width="75" height="75" 
+   style="position: absolute; left: 405; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb5" width="75" height="75" 
+   style="position: absolute; left: 501; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb6" width="75" height="75" 
+   style="position: absolute; left: 693; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb7" width="75" height="75" 
+   style="position: absolute; left: 789; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb8" width="75" height="75" 
+   style="position: absolute; left: 884; top: 142; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="gelb9" width="75" height="75" 
+   style="position: absolute; left: 980; top: 142; z-index: 1;"></canvas></a>
+   
+   <!-- Lila Felder -->
+   <a href="#" onclick="draw_number()"><canvas id="lila1" width="75" height="75" 
+   style="position: absolute; left: 21; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila2" width="75" height="75" 
+   style="position: absolute; left: 117; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila3" width="75" height="75" 
+   style="position: absolute; left: 213; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila4" width="75" height="75" 
+   style="position: absolute; left: 309; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila5" width="75" height="75" 
+   style="position: absolute; left: 501; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila6" width="75" height="75" 
+   style="position: absolute; left: 597; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila7" width="75" height="75" 
+   style="position: absolute; left: 693; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila8" width="75" height="75" 
+   style="position: absolute; left: 789; top: 267; z-index: 1;"></canvas></a>
+   <a href="#" onclick="draw_number()"><canvas id="lila9" width="75" height="75" 
+   style="position: absolute; left: 884; top: 267; z-index: 1;"></canvas></a>
+   
+   <!-- Fehlwürfe-Felder -->
+   <canvas id="fehl1" width="90" height="90" 
+   style="position: absolute; left: 438; top: 400; z-index: 1;"></canvas>
+   <canvas id="fehl2" width="90" height="90" 
+   style="position: absolute; left: 535; top: 400; z-index: 1;"></canvas>
+   <canvas id="fehl3" width="90" height="90" 
+   style="position: absolute; left: 632; top: 400; z-index: 1;"></canvas>
+   <canvas id="fehl4" width="90" height="90" 
+   style="position: absolute; left: 729; top: 400; z-index: 1;"></canvas>
+  
+   <!-- Gesamtpunkte Farbe -->
+   <canvas id="rot_gesamt" width="90" height="90" 
+   style="position: absolute; left: 46; top: 538; z-index: 1;"></canvas>
+   <canvas id="gelb_gesamt" width="90" height="90" 
+   style="position: absolute; left: 146; top: 538; z-index: 1;"></canvas>
+   <canvas id="lila_gesamt" width="90" height="90" 
+   style="position: absolute; left: 252; top: 538; z-index: 1;"></canvas>
+
+   <!-- Bonusfelder -->
+   <canvas id="bonus1" width="90" height="90" 
+   style="position: absolute; left: 384; top: 538; z-index: 1;"></canvas>
+   <canvas id="bonus2" width="90" height="90" 
+   style="position: absolute; left: 470; top: 538; z-index: 1;"></canvas>
+   <canvas id="bonus3" width="90" height="90" 
+   style="position: absolute; left: 556; top: 538; z-index: 1;"></canvas>
+   <canvas id="bonus4" width="90" height="90" 
+   style="position: absolute; left: 640; top: 538; z-index: 1;"></canvas>
+   <canvas id="bonus5" width="90" height="90" 
+   style="position: absolute; left: 726; top: 538; z-index: 1;"></canvas>
+   
+   <!-- Fehlwürfe und Ergebnis -->
+   <canvas id="fehl_gesamt" width="90" height="90" 
+   style="position: absolute; left: 867; top: 538; z-index: 1;"></canvas>
+   
+   <canvas id="summe_gesamt_1" width="90" height="90" 
+   style="position: absolute; left: 985; top: 538; z-index: 1;"></canvas>
+   <canvas id="summe_gesamt_2" width="90" height="90" 
+   style="position: absolute; left: 1042; top: 538; z-index: 1;"></canvas>
+   <canvas id="summe_gesamt_3" width="90" height="90" 
+   style="position: absolute; left: 1099; top: 538; z-index: 1;"></canvas>
+   
+   <!-- Würfel -->
+   <canvas id="wuerfel_rot" width="90" height="90" 
+   style="position: absolute; left: 44; top: 674; z-index: 1;"></canvas>
+   <canvas id="wuerfel_gelb" width="90" height="90" 
+   style="position: absolute; left: 145; top: 674; z-index: 1;"></canvas>
+   <canvas id="wuerfel_lila" width="90" height="90" 
+   style="position: absolute; left: 251; top: 674; z-index: 1;"></canvas>
+   
+   <!-- Summe des Wurfs -->
+   <canvas id="summe_wurf" width="90" height="90" 
+   style="position: absolute; left: 431; top: 679; z-index: 1;"></canvas>
+   
+   <!-- Buttons -->
+
+   
+   
+</div>
+
+<!-- Bilder -->
+<img src="images/spielfeld1.png" id="spielfeld_img" style="display:none">
+
+<img src="images/1.png" id="1_img" style="display:none">
+<img src="images/2.png" id="2_img" style="display:none">
+<img src="images/3.png" id="3_img" style="display:none">
+<img src="images/4.png" id="4_img" style="display:none">
+<img src="images/5.png" id="5_img" style="display:none">
+<img src="images/6.png" id="6_img" style="display:none">
+<img src="images/7.png" id="7_img" style="display:none">
+<img src="images/8.png" id="8_img" style="display:none">
+<img src="images/9.png" id="9_img" style="display:none">
+<img src="images/10.png" id="10_img" style="display:none">
+<img src="images/11.png" id="11_img" style="display:none">
+<img src="images/12.png" id="12_img" style="display:none">
+<img src="images/13.png" id="13_img" style="display:none">
+<img src="images/14.png" id="14_img" style="display:none">
+<img src="images/15.png" id="15_img" style="display:none">
+<img src="images/16.png" id="16_img" style="display:none">
+<img src="images/17.png" id="17_img" style="display:none">
+<img src="images/18.png" id="18_img" style="display:none">
+<img src="images/kreuz.png" id="x_img" style="display:none">
+
+<img src="images/wuerfel1.png" id="wuerfel1_img" style="display:none">
+<img src="images/wuerfel2.png" id="wuerfel2_img" style="display:none">
+<img src="images/wuerfel3.png" id="wuerfel3_img" style="display:none">
+<img src="images/wuerfel4.png" id="wuerfel4_img" style="display:none">
+<img src="images/wuerfel5.png" id="wuerfel5_img" style="display:none">
+<img src="images/wuerfel6.png" id="wuerfel6_img" style="display:none">
 
 </body>
 </html>
