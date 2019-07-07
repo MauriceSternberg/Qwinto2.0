@@ -1,19 +1,90 @@
 <html>
  <head>
  	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
- 	<script src="javascript/Qwinto_MA.js"></script>
+ 	<script src="javascript/Qwinto.js"></script>
 	<script type="text/javascript">
+	var diceValue = 0;
+	var Dice1 = true;
+	var Dice1Value = 0;
+	var Dice2 = true;
+	var Dice2Value = 0;
+	var Dice3 = true;
+	var Dice3Value = 0;
+	var Selected = "rot1";
+	var FeldID;
+	
 		function draw_spielfeld() {
 		  var c = document.getElementById("spielfeld_bg");
 		  var ctx = c.getContext("2d");
 		  var img = document.getElementById("spielfeld_img");
 		  ctx.drawImage(img,10,10);
 		}
+		
 		function draw_number() {
 		  var c = document.getElementById("rot1");
 		  var ctx = c.getContext("2d");
 		  var img = document.getElementById("18_img");
 		  ctx.drawImage(img,10,10);
+		}
+		
+		function roll_dice () {
+		  var c = document.getElementById("summe_wurf");
+		  var ctx = c.getContext("2d");
+		  var img = document.getElementById("white_img");
+		  ctx.drawImage(img,10,10);
+		  if (Dice1 && !Dice2 && !Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }else if (Dice1 && Dice2 && !Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }else if (Dice1 && !Dice2 && Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }else if (!Dice1 && Dice2 && !Dice3) {
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }else if (!Dice1 && Dice2 && Dice3) {
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }else if (!Dice1 && !Dice2 && Dice3) {
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }else if (Dice1 && Dice2 && Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		  }
+		  diceValue=Dice1Value+Dice2Value+Dice3Value;
+		  console.log(diceValue);
+		  img = document.getElementById(diceValue + "_img");
+		  ctx.drawImage(img,10,10);
+		  }
+		  
+		function select (FeldID) {
+		  alert(FeldID);
+		  alert("Hallo"); 
+		  var c = document.getElementById(Selected);
+		  var ctx = c.getContext("2d");
+		  if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
+		  	var img = document.getElementById("whitep_img");
+		  } else {
+		  	var img = document.getElementById("whitec_img");
+		  }
+		  ctx.drawImage(img,10,10);
+		  c = document.getElementById(FeldID);
+		  ctx = c.getContext("2d");
+		  if (FeldID == "rot2" || FeldID == "rot5" || FeldID == "gelb7" || FeldID == "lila3" || FeldID == "lila9") {
+		  	img = document.getElementById("selectp_img");
+		  } else {
+		  	img = document.getElementById("selectc_img");
+		  }
+		  ctx.drawImage(img,10,10);
+		  Selected = FeldID;
+		  }
+		  
+		function confirmInput () {
+			var c = document.getElementById(Selected);
+			var ctx = c.getContext("2d");
+			var img = document.getElementById(diceValue + "_img");
+			ctx.drawImage(img,10,10);
 		}
 	</script>
 	
@@ -27,7 +98,7 @@
 <button onClick="draw_number()">18 Würfeln</button>
 <button onclick="roll_dice()">Würfeln</button>
 <button onclick="second_try()">2. Versuch</button>
-<button onclick="confirmInput">Eingabe bestätigen</button>
+<button onclick="confirmInput()">Eingabe bestätigen</button>
 </p>
 
 <div style="position: relative; width: 1220px; height:840px;">
@@ -37,9 +108,9 @@
    style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
    
    <!-- Rote Felder -->
-   <a href="#" onclick="draw_number()"><canvas id="rot1" width="75pxpx" height="75px" 
+   <a href="#" onclick="select(this.id)"><canvas id="rot1" width="75pxpx" height="75px" 
    style="position: absolute; left: 213px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot2" width="75px" height="75px" 
+   <a href="#" onclick="select(this.id)"><canvas id="rot2" width="75px" height="75px" 
    style="position: absolute; left: 309px; top: 20px; z-index: 1;"></canvas></a>
    <a href="#" onclick="draw_number()"><canvas id="rot3" width="75px" height="75px" 
    style="position: absolute; left: 405px; top: 20px; z-index: 1;"></canvas></a>
@@ -177,6 +248,11 @@
 <img src="images/17.png" id="17_img" style="display:none">
 <img src="images/18.png" id="18_img" style="display:none">
 <img src="images/kreuz.png" id="x_img" style="display:none">
+<img src="images/White.png" id="white_img" style="display:none">
+<img src="images/White_Circel.png" id="whitec_img" style="display:none">
+<img src="images/White_Poly.png" id="whitep_img" style="display:none">
+<img src="images/Selected_Circel.png" id="selectc_img" style="display:none">
+<img src="images/Selected_Poly.png" id="selectp_img" style="display:none">
 
 <img src="images/wuerfel1.png" id="wuerfel1_img" style="display:none">
 <img src="images/wuerfel2.png" id="wuerfel2_img" style="display:none">
