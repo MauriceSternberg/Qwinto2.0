@@ -85,15 +85,40 @@ public class Qwinto extends Game {
 	public void execute(User user, String gsonString) {
 		// TODO Auto-generated method stub
 		
+		System.out.println("");
+		System.out.println("Execute-Methode aufgerufen mit Daten:");
+		System.out.println(user.getName() + ", " + gsonString);
+		
+		
                 if(this.gState==GameState.CLOSED) return;
 		
-		if(gsonString.equals("CLOSE")){
+		if(gsonString.equals("CLOSE") && isHost(user).equals(",HOST")){
 			sendGameDataToClients("CLOSE");
 			closeGame();
 			return;
 		}
 		
+		if(gsonString.equals("CLOSE") && isHost(user).equals(",NOTTHEHOST")) {
+			sendGameDataToClients("PLAYERLEFT");
+		}
+		
+		if(spectatorList.contains(user)) {
+			return;
+		}
+		
 		if (gsonString.equals("RESTART")) {
+			if(gState == GameState.RUNNING) {
+				sendGameDataToClients("Cannot restart game once it was started.");
+				return;
+			}
+		}
+		
+		if (gsonString.equals("RESTART") && isHost(user).equals(",HOST")) {;
+			if(gState == GameState.RUNNING) 
+			{
+				sendGameDataToClients("Cannot restart game once it was started.");
+				return;
+			}
 			
 			boardList.clear();
 			for(User u : playerList)
@@ -157,9 +182,19 @@ public class Qwinto extends Game {
 		
 		ArrayList<Board> boardList  = getBoardList();
 
-		for (int i = 0; i < boardList.size(); i++) {
+		/*for (int i = 0; i < boardList.size(); i++) {
 			gameData += String.valueOf(boardList.get(i));
 			gameData += ',';
+		}*/
+		
+		for (int i = 0; i < boardList.size(); i++) {
+			Board board = boardList.get(i);
+			if (board.getUser().getName() == user.getName())
+			{
+				//TODO Format der Daten ist noch zu definieren
+				//gameData += String.valueOf(board.getFields());
+				gameData += ',';
+			}
 		}
 		
 		if(playerList.size() < 2){
