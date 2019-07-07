@@ -40,3 +40,8 @@
 [2019-07-02 00:25:43.799] [IP: /0:0:0:0:0:0:0:1] [LOGIN] Logging in user "test" succeeded
 [2019-07-02 00:26:34.14] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded
 [2019-07-03 21:17:43.809] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded
+[2019-07-05 00:18:09.789] [IP: /192.168.1.7] [LOGOUT] Logging out user "test" succeeded; Session length: 1620  Minutes
+[2019-07-05 00:18:44.449] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded
+[2019-07-05 00:22:57.721] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded
+[2019-07-05 00:25:36.56] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded
+[2019-07-05 00:28:39.466] [IP: /192.168.1.7] [LOGIN] Logging in user "test" succeeded

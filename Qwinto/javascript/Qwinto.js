@@ -13,25 +13,25 @@ var Dice2Value = 0;
 var Dice3 = true;
 var Dice3Value = 0;
 var xImg = "/Qwinto/images/x.png";
-var -Img = "/Qwinto/images/-.png";
-var 1Img = "/Qwinto/images/1.png";
-var 2Img = "/Qwinto/images/2.png";
-var 3Img = "/Qwinto/images/3.png";
-var 4Img = "/Qwinto/images/4.png";
-var 5Img = "/Qwinto/images/5.png";
-var 6Img = "/Qwinto/images/6.png";
-var 7Img = "/Qwinto/images/7.png";
-var 8Img = "/Qwinto/images/8.png";
-var 9Img = "/Qwinto/images/9.png";
-var 10Img = "/Qwinto/images/10.png";
-var 11Img = "/Qwinto/images/11.png";
-var 12Img = "/Qwinto/images/12.png";
-var 13Img = "/Qwinto/images/13.png";
-var 14Img = "/Qwinto/images/14.png";
-var 15Img = "/Qwinto/images/15.png";
-var 16Img = "/Qwinto/images/16.png";
-var 17Img = "/Qwinto/images/17.png";
-var 18Img = "/Qwinto/images/18.png";
+var iImg = "/Qwinto/images/i.png";
+var Img1 = "/Qwinto/images/1.png";
+var Img2 = "/Qwinto/images/2.png";
+var Img3 = "/Qwinto/images/3.png";
+var Img4 = "/Qwinto/images/4.png";
+var Img5 = "/Qwinto/images/5.png";
+var Img6 = "/Qwinto/images/6.png";
+var Img7 = "/Qwinto/images/7.png";
+var Img8 = "/Qwinto/images/8.png";
+var Img9 = "/Qwinto/images/9.png";
+var Img10 = "/Qwinto/images/10.png";
+var Img11 = "/Qwinto/images/11.png";
+var Img12 = "/Qwinto/images/12.png";
+var Img13 = "/Qwinto/images/13.png";
+var Img14 = "/Qwinto/images/14.png";
+var Img15 = "/Qwinto/images/15.png";
+var Img16 = "/Qwinto/images/16.png";
+var Img17 = "/Qwinto/images/17.png";
+var Img18 = "/Qwinto/images/18.png";
 
 // Standard Event
 
@@ -91,8 +91,9 @@ window.onload = initFields;
 
 function initFields () {
 	var parent = document.getElementById ("spielfeld");
+	
 	for (var i = 0; i < 41; i++) {
-		var img = doument.createElement ("img");
+		var img = document.createElement ("img");
 	}
 }
 
@@ -249,40 +250,40 @@ function getImg (x) {
 	if ( x == -1) {
 		return xImg;
 	} else if (x == 1) {
-		return 1Img;
+		return Img1;
 	} else if (x == 2) {
-		return 2Img;
+		return Img2;
 	} else if (x == 3) {
-		return 3Img;
+		return Img3;
 	} else if (x == 4) {
-		return 4Img;
+		return Img4;
 	} else if (x == 5) {
-		return 5Img;
+		return Img5;
 	} else if (x == 6) {
-		return 6Img;
+		return Img6;
 	} else if (x == 7) {
-		return 7Img;
+		return Img7;
 	} else if (x == 8) {
-		return 8Img;
+		return Img8;
 	} else if (x == 9) {
-		return 9Img;
+		return Img9;
 	} else if (x == 10) {
-		return 10Img;
+		return Img10;
 	} else if (x == 11) {
-		return 11Img;
+		return Img11;
 	} else if (x == 12) {
-		return 12Img;
+		return Img12;
 	} else if (x == 13) {
-		return 13Img;
+		return Img13;
 	} else if (x == 14) {
-		return 14Img;
+		return Img14;
 	} else if (x == 15) {
-		return 15Img;
+		return Img15;
 	} else if (x == 16) {
-		return 16Img;
+		return Img16;
 	} else if (x == 17) {
-		return 17Img;
+		return Img17;
 	} else if (x == 18) {
-		return 18Img;
+		return Img18;
 	}
 }

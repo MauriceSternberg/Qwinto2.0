@@ -27,7 +27,6 @@ public class Qwinto extends Game {
 	private ArrayList<Board> boardList = new ArrayList<Board>();
 	private ArrayList<Field> fields;
 	private int turnCounter = 0;
-
 	private int fehlWürfe = 0;
 	private String playerLeft = null;
 	
