@@ -74,6 +74,7 @@ addListener ('START', function (event) {
 
 // Playerleft
 
+
 addListener ('PLAYERLEFT', function (event) {
 	var stringFromServer = event.data;
 	playerMessage = stringFromServer;
