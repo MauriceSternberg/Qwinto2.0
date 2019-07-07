@@ -95,6 +95,10 @@
 			Selected = "t";
 			alert(Selected);
 		}
+		
+		function selectDice (DiceNumber) {
+			if (
+		}
 	</script>
 	
   <title>Qwinto - Spass fuer die ganze Familie</title>
@@ -117,63 +121,63 @@
    style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
    
    <!-- Rote Felder -->
-   <a href="#" onclick="select(this.id)"><canvas id="rot1" width="75pxpx" height="75px" 
+   <a href="#" onclick="select(rot1)"><canvas id="rot1" width="75pxpx" height="75px" 
    style="position: absolute; left: 213px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="select(this.id)"><canvas id="rot2" width="75px" height="75px" 
+   <a href="#" onclick="select(rot2)"><canvas id="rot2" width="75px" height="75px" 
    style="position: absolute; left: 309px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot3" width="75px" height="75px" 
+   <a href="#" onclick="select(rot3)"><canvas id="rot3" width="75px" height="75px" 
    style="position: absolute; left: 405px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot4" width="75px" height="75px" 
+   <a href="#" onclick="select(rot4)"><canvas id="rot4" width="75px" height="75px" 
    style="position: absolute; left: 597px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot5" width="75px" height="75px" 
+   <a href="#" onclick="select(rot5)"><canvas id="rot5" width="75px" height="75px" 
    style="position: absolute; left: 693px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot6" width="75px" height="75px" 
+   <a href="#" onclick="select(rot6)"><canvas id="rot6" width="75px" height="75px" 
    style="position: absolute; left: 789px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot7" width="75px" height="75px" 
+   <a href="#" onclick="select(rot7)"><canvas id="rot7" width="75px" height="75px" 
    style="position: absolute; left: 884px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot8" width="75px" height="75px" 
+   <a href="#" onclick="select(rot8)"><canvas id="rot8" width="75px" height="75px" 
    style="position: absolute; left: 980px; top: 20px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="rot9" width="75px" height="75px" 
+   <a href="#" onclick="select(rot9)"><canvas id="rot9" width="75px" height="75px" 
    style="position: absolute; left: 1076px; top: 20px; z-index: 1;"></canvas></a>
    
    <!-- Gelbe Felder -->
-   <a href="#" onclick="draw_number()"><canvas id="gelb1" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb1)"><canvas id="gelb1" width="75px" height="75px" 
    style="position: absolute; left: 117px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb2" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb2)"><canvas id="gelb2" width="75px" height="75px" 
    style="position: absolute; left: 213px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb3" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb3)"><canvas id="gelb3" width="75px" height="75px" 
    style="position: absolute; left: 309px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb4" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb4)"><canvas id="gelb4" width="75px" height="75px" 
    style="position: absolute; left: 405px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb5" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb5)"><canvas id="gelb5" width="75px" height="75px" 
    style="position: absolute; left: 501px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb6" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb6)"><canvas id="gelb6" width="75px" height="75px" 
    style="position: absolute; left: 693px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb7" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb7)"><canvas id="gelb7" width="75px" height="75px" 
    style="position: absolute; left: 789px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb8" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb8)"><canvas id="gelb8" width="75px" height="75px" 
    style="position: absolute; left: 884px; top: 142px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="gelb9" width="75px" height="75px" 
+   <a href="#" onclick="select(gelb9)"><canvas id="gelb9" width="75px" height="75px" 
    style="position: absolute; left: 980px; top: 142px; z-index: 1;"></canvas></a>
    
    <!-- Lila Felder -->
-   <a href="#" onclick="draw_number()"><canvas id="lila1" width="75px" height="75px" 
+   <a href="#" onclick="select(lila1)"><canvas id="lila1" width="75px" height="75px" 
    style="position: absolute; left: 21px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila2" width="75px" height="75px" 
+   <a href="#" onclick="select(lila2)"><canvas id="lila2" width="75px" height="75px" 
    style="position: absolute; left: 117px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila3" width="75px" height="75px" 
+   <a href="#" onclick="select(lila3)"><canvas id="lila3" width="75px" height="75px" 
    style="position: absolute; left: 213px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila4" width="75px" height="75px" 
+   <a href="#" onclick="select(lila4)"><canvas id="lila4" width="75px" height="75px" 
    style="position: absolute; left: 309px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila5" width="75px" height="75px" 
+   <a href="#" onclick="select(lila5)"><canvas id="lila5" width="75px" height="75px" 
    style="position: absolute; left: 501px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila6" width="75px" height="75px" 
+   <a href="#" onclick="select(lila6)"><canvas id="lila6" width="75px" height="75px" 
    style="position: absolute; left: 597px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila7" width="75px" height="75px" 
+   <a href="#" onclick="select(lila7)"><canvas id="lila7" width="75px" height="75px" 
    style="position: absolute; left: 693px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila8" width="75px" height="75px" 
+   <a href="#" onclick="select(lila8)"><canvas id="lila8" width="75px" height="75px" 
    style="position: absolute; left: 789px; top: 267px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="draw_number()"><canvas id="lila9" width="75" height="75px" 
+   <a href="#" onclick="select(lila9)"><canvas id="lila9" width="75" height="75px" 
    style="position: absolute; left: 884px; top: 267px; z-index: 1;"></canvas></a>
    
    <!-- Fehlwürfe-Felder -->
