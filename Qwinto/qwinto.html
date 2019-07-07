@@ -59,16 +59,19 @@
 		  }
 		  
 		function select (Feld) {
-		  var c = document.getElementById(Selected);
-		  var ctx = c.getContext("2d");
 		  if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
+		  	var c = document.getElementById(Selected);
+			var ctx = c.getContext("2d");
 		  	var img = document.getElementById("whitep_img");
+		  	ctx.drawImage(img,10,10);
 		  } else if (Selected == "t") {
 		  	var img = document.getElementById("transparent_img");
 		  } else {
 		  	var img = document.getElementById("whitec_img");
+		  	var c = document.getElementById(Selected);
+		 	var ctx = c.getContext("2d");
+		 	ctx.drawImage(img,10,10);
 		  }
-		  ctx.drawImage(img,10,10);
 		  var FeldID = Feld.id;
 		  c = document.getElementById(FeldID);
 		  ctx = c.getContext("2d");
