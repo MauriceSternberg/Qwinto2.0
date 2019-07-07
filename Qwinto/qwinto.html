@@ -93,26 +93,28 @@
 			var img = document.getElementById(diceValue + "_img");
 			ctx.drawImage(img,10,10);
 			Selected = "t";
-			alert(Selected);
 		}
 		
 		function selectDice (Dice) {
-			var DiceID = Dice.id
+			var DiceID = Dice.id;
 			if (DiceID == "wuerfel_rot") {
 				if (Dice1 == true) {
 					Dice1 = false;
+					Dice1Value = 0;
 				} else if (Dice1 == false) {
 					Dice1 = true;
 				}
 			} else if (DiceID == "wuerfel_gelb") {
 				if (Dice2 == true) {
 					Dice2 = false;
+					Dice2Value = 0;
 				} else if (Dice2 == false) {
 					Dice2 = true;
 				}
 			} else if (DiceID == "wuerfel_lila") {
 				if (Dice3 == true) {
 					Dice3 = false;
+					Dice3Value = 0;
 				} else if (Dice3 == false) {
 					Dice3 = true;
 				}
@@ -241,11 +243,11 @@
    style="position: absolute; left: 1099px; top: 538px; z-index: 1;"></canvas>
    
    <!-- Würfel -->
-   <a href="#" onclick="function()"><canvas id="wuerfel_rot" width="90px" height="90px" 
+   <a href="#" onclick="selectDice(wuerfel_rot)"><canvas id="wuerfel_rot" width="90px" height="90px" 
    style="position: absolute; left: 44px; top: 674px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="function()"><canvas id="wuerfel_gelb" width="90px" height="90px" 
+   <a href="#" onclick="selectDice(wuerfel_gelb)"><canvas id="wuerfel_gelb" width="90px" height="90px" 
    style="position: absolute; left: 145px; top: 674px; z-index: 1;"></canvas></a>
-   <a href="#" onclick="function()"><canvas id="wuerfel_lila" width="90px" height="90px" 
+   <a href="#" onclick="selectDice(wuerfel_lila)"><canvas id="wuerfel_lila" width="90px" height="90px" 
    style="position: absolute; left: 251px; top: 674px; z-index: 1;"></canvas></a>
    
    <!-- Summe des Wurfs -->
