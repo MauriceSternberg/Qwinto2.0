@@ -96,8 +96,27 @@
 			alert(Selected);
 		}
 		
-		function selectDice (DiceNumber) {
-			if (
+		function selectDice (Dice) {
+			var DiceID = Dice.id
+			if (DiceID == "wuerfel_rot") {
+				if (Dice1 == true) {
+					Dice1 = false;
+				} else if (Dice1 == false) {
+					Dice1 = true;
+				}
+			} else if (DiceID == "wuerfel_gelb") {
+				if (Dice2 == true) {
+					Dice2 = false;
+				} else if (Dice2 == false) {
+					Dice2 = true;
+				}
+			} else if (DiceID == "wuerfel_lila") {
+				if (Dice3 == true) {
+					Dice3 = false;
+				} else if (Dice3 == false) {
+					Dice3 = true;
+				}
+			}
 		}
 	</script>
 	
