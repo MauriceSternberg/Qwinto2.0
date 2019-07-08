@@ -3,7 +3,7 @@
 playerMessage = "";
 var statusWait = true;
 var arrFields = [0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0,0,0, 0,  0];
-var sentFields = [0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0,0,0, 0,  0];
+//var sentFields = [0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0,0,0, 0,  0];
 var currentPlayer = 0;
 var diceValue = 0;
 var Dice1 = true;
@@ -14,26 +14,6 @@ var Dice3 = true;
 var Dice3Value = 0;
 var Selected = "rot1";
 var FeldID;
-var xImg = "/Qwinto/images/x.png";
-var iImg = "/Qwinto/images/i.png";
-var Img1 = "/Qwinto/images/1.png";
-var Img2 = "/Qwinto/images/2.png";
-var Img3 = "/Qwinto/images/3.png";
-var Img4 = "/Qwinto/images/4.png";
-var Img5 = "/Qwinto/images/5.png";
-var Img6 = "/Qwinto/images/6.png";
-var Img7 = "/Qwinto/images/7.png";
-var Img8 = "/Qwinto/images/8.png";
-var Img9 = "/Qwinto/images/9.png";
-var Img10 = "/Qwinto/images/10.png";
-var Img11 = "/Qwinto/images/11.png";
-var Img12 = "/Qwinto/images/12.png";
-var Img13 = "/Qwinto/images/13.png";
-var Img14 = "/Qwinto/images/14.png";
-var Img15 = "/Qwinto/images/15.png";
-var Img16 = "/Qwinto/images/16.png";
-var Img17 = "/Qwinto/images/17.png";
-var Img18 = "/Qwinto/images/18.png";
 
 // Standard Event
 
@@ -52,7 +32,7 @@ addListener ('standardEvent', function (event) {
 			setVisible();
 		}
 		
-		sentFields = [0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0,0,0, 0,  0];
+		//sentFields = [0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0, 0,0,0,0, 0,0,0, 0,0,0,0,0, 0,  0];
 		//			  Reihe 1		    |Reihe 2		   |Reihe3		   	  |FehlV   |Totals|Bonus 	 |-P |Gesamt
 		// ArrayFeld  0-8				 9-17				18-26			   27-30	31-33  34-38	  39  40
 		document.getElementById ("Player").innerHTML = playerMessage;
@@ -89,16 +69,7 @@ addListener ('CLOSE', function (event) {
 	document.getElementById ("Player").innerHTML = "Spiel wurde vom Host beendet!";
 });
 
-// Feld initialisieren             TO DO!
-window.onload = initFields;
-
-function initFields () {
-	var parent = document.getElementById ("spielfeld");
-	
-	for (var i = 0; i < 41; i++) {
-		var img = document.createElement ("img");
-	}
-}
+// Feld initialisieren
 
 function draw_spielfeld() {
 //Hintergrund
@@ -158,9 +129,6 @@ function setVisible () {
 function closeGame () {
 	sendDataToServer ("CLOSE");
 }
-
-
-
 
 // Wuerfeln
 
@@ -318,50 +286,6 @@ function select (Feld) {
 
 // Feld setzen
 
-function setField (x, y) {
+function setField () {
 	sentFields [x] = y;
-}
-
-// Bild/Zahl
-
-function getImg (x) {
-	if ( x == -1) {
-		return xImg;
-	} else if (x == 1) {
-		return Img1;
-	} else if (x == 2) {
-		return Img2;
-	} else if (x == 3) {
-		return Img3;
-	} else if (x == 4) {
-		return Img4;
-	} else if (x == 5) {
-		return Img5;
-	} else if (x == 6) {
-		return Img6;
-	} else if (x == 7) {
-		return Img7;
-	} else if (x == 8) {
-		return Img8;
-	} else if (x == 9) {
-		return Img9;
-	} else if (x == 10) {
-		return Img10;
-	} else if (x == 11) {
-		return Img11;
-	} else if (x == 12) {
-		return Img12;
-	} else if (x == 13) {
-		return Img13;
-	} else if (x == 14) {
-		return Img14;
-	} else if (x == 15) {
-		return Img15;
-	} else if (x == 16) {
-		return Img16;
-	} else if (x == 17) {
-		return Img17;
-	} else if (x == 18) {
-		return Img18;
-	}
 }
