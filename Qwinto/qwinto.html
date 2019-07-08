@@ -13,13 +13,29 @@
 	var Selected = "rot1";
 	var FeldID;
 	
-		function draw_spielfeld() {
+	function draw_spielfeld() {
+		  //Hintergrund
 		  var c = document.getElementById("spielfeld_bg");
 		  var ctx = c.getContext("2d");
 		  var img = document.getElementById("spielfeld_img");
 		  ctx.drawImage(img,10,10);
+		  //Roter Würfel
+		  var w1 = document.getElementById("wuerfel_rot");
+		  var wtx1 = w1.getContext("2d");
+		  var img1 = document.getElementById("wuerfel1_img");
+		  wtx1.drawImage(img1,10,10);
+		  //Gelber Würfel
+		  var w2 = document.getElementById("wuerfel_gelb");
+		  var wtx2 = w2.getContext("2d");
+		  var img2 = document.getElementById("wuerfel2_img");
+		  wtx2.drawImage(img2,10,10);
+		  //Lila Würfel
+		  var w3 = document.getElementById("wuerfel_lila");
+		  var wtx3 = w3.getContext("2d");
+		  var img3 = document.getElementById("wuerfel3_img");
+		  wtx3.drawImage(img3,10,10);
 		}
-		
+	
 		function draw_number() {
 		  var c = document.getElementById("rot1");
 		  var ctx = c.getContext("2d");
@@ -155,14 +171,7 @@
  </head>
 
 <body>
-<!-- Buttons -->
-<p>
-<button onClick="draw_spielfeld()">Erstellen</button>
-<button onClick="draw_number()">18 Würfeln</button>
-<button onclick="roll_dice()">Würfeln</button>
-<button onclick="second_try()">2. Versuch</button>
-<button onclick="confirmInput()">Eingabe bestätigen</button>
-</p>
+
 
 <div style="position: relative; width: 1220px; height:840px;">
 
@@ -287,6 +296,29 @@
 
    
    
+</div>
+
+<!-- Buttons -->
+<p>
+<button onClick="draw_spielfeld()">Erstellen</button>
+<button onclick="roll_dice()">Würfeln</button>
+<button onclick="second_try()">2. Versuch</button>
+<button onclick="confirmInput()">Eingabe bestätigen</button>
+</p>
+
+//Gegnerspielfeld
+<div class="tabs">
+
+<input checked="checked" id="tab1" type="radio" name="tabs" />
+   <nav>
+   
+      <label for="tab1">*aktueller Spieler*</label>
+   </nav>
+   
+   <figure>
+      <div class="tab1"> <img src="images/spielfeld_gegner.png" id="spielfeld_gegner" > </div>
+   </figure>
+
 </div>
 
 <!-- Bilder -->
