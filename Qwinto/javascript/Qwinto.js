@@ -14,6 +14,8 @@ var Dice3 = true;
 var Dice3Value = 0;
 var Selected = "rot1";
 var FeldID;
+var position = 0;
+var fieldSet;
 
 // Standard Event
 
@@ -244,20 +246,28 @@ function selectDice (Dice) {
 // Eingabe Bestaetigen
 
 function confirmInput () {
-	var c = document.getElementById(Selected);
-	var ctx = c.getContext("2d");
-	if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
-		var img = document.getElementById("whitep_img");
-	} else {
-		var img = document.getElementById("whitec_img");
+	setPosition();
+	setField();
+	if (fieldSet == true) {
+		var c = document.getElementById(Selected);
+		var ctx = c.getContext("2d");
+		if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
+			var img = document.getElementById("whitep_img");
+		} else {
+			var img = document.getElementById("whitec_img");
+		}
+		ctx.drawImage(img,10,10);
+		var img = document.getElementById(diceValue + "_img");
+		ctx.drawImage(img,10,10);
+		Selected = "t";
 	}
-	ctx.drawImage(img,10,10);
-	var img = document.getElementById(diceValue + "_img");
-	ctx.drawImage(img,10,10);
-	Selected = "t";
+	for (var i = 0; i < arrFields.length; i++) {
+		console.log(i);
+	}
 }
 
 // Feld waehlen
+
 function select (Feld) {
 	if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
 	 	var c = document.getElementById(Selected);
@@ -284,8 +294,181 @@ function select (Feld) {
 	Selected = FeldID;
 }
 
+// Position
+
+function setPosition () {
+	if (Selected == "rot1") {
+		position = 0;
+	} else if (Selected == "rot2") {
+		position = 1;
+	} else if (Selected == "rot3") {
+		position = 2;
+	} else if (Selected == "rot4") {
+		position = 3;
+	} else if (Selected == "rot5") {
+		position = 4;
+	} else if (Selected == "rot6") {
+		position = 5;
+	} else if (Selected == "rot7") {
+		position = 6;
+	} else if (Selected == "rot8") {
+		position = 7;
+	} else if (Selected == "rot9") {
+		position = 8;
+	} else if (Selected == "gelb1") {
+		position = 9;
+	} else if (Selected == "gelb2") {
+		position = 10;
+	} else if (Selected == "gelb3") {
+		position = 11;
+	} else if (Selected == "gelb4") {
+		position = 12;
+	} else if (Selected == "gelb5") {
+		position = 13;
+	} else if (Selected == "gelb6") {
+		position = 14;
+	} else if (Selected == "gelb7") {
+		position = 15;
+	} else if (Selected == "gelb8") {
+		position = 16;
+	} else if (Selected == "gelb9") {
+		position = 17;
+	} else if (Selected == "lila1") {
+		position = 18;
+	} else if (Selected == "lila2") {
+		position = 19;
+	} else if (Selected == "lila3") {
+		position = 20;
+	} else if (Selected == "lila4") {
+		position = 21;
+	} else if (Selected == "lila5") {
+		position = 22;
+	} else if (Selected == "lila6") {
+		position = 23;
+	} else if (Selected == "lila7") {
+		position = 24;
+	} else if (Selected == "lila8") {
+		position = 25;
+	} else if (Selected == "lila9") {
+		position = 26;
+	}
+}
+
 // Feld setzen
 
 function setField () {
-	sentFields [x] = y;
+	fieldSet = false;
+	var row = true;
+	if (0 <= position <= 8) {
+		for (var i = 0; i <= 8; i++) {
+			if (arrFields[i] >= diceValue && i < position) {
+				alert("Die Zahl ist zu niedrig!");
+				row = false;
+				break;
+			} else if (arrFields[i] != 0 && arrFields[i] <= diceValue && i > position) {
+				alert("Die Zahl ist zu hoch!");
+				row = false;
+				break;
+			}
+		}
+	} else if (9 <= position <= 17) {
+		for (var i = 9; i <= 17; i++) {
+			if (arrFields[i] >= diceValue && i < position) {
+				alert("Die Zahl ist zu niedrig!");
+				row = false;
+				break;
+			} else if (arrFields[i] != 0 && arrFields[i] <= diceValue && i > position) {
+				alert("Die Zahl ist zu hoch!");
+				row = false;
+				break;
+			}
+		}
+	} else if (18 <= position <= 26) {
+		for (var i = 18; i <= 26; i++) {
+			if (arrFields[i] >= diceValue && i < position) {
+				alert("Die Zahl ist zu niedrig!");
+				row = false;
+				break;
+			} else if (arrFields[i] != 0 && arrFields[i] <= diceValue && i > position) {
+				alert("Die Zahl ist zu hoch!");
+				row = false;
+				break;
+			}
+		}
+	}
+	if (row == true) {
+		if (position == 8 || position == 18) {									 							 //Spalten 1 und 12 / Felder 9 und 19
+			arrFields[position] = diceValue;
+			fieldSet = true;
+		} else if (position == 9 || position == 7) {														 //Spalten 2 und 11 / Felder 8 und 10
+			if (arrFields[position + 10] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 19 || position == 17) {														 //Spalten 2 und 11 / Felder 18 und 20
+			if (arrFields[position - 10] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 0 || position == 1 || position == 4 || position == 5 || position == 6)	{	 //Spalten 3, 4, 8, 9, 10 / Felder 1, 2, 5, 6, 7
+			if (arrFields[position + 10] != diceValue && arrFields[position + 20] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 10 || position == 11 || position == 14 || position == 15 || position == 16) { //Spalten 3, 4, 8, 9, 10 / Felder 11, 12, 15, 16, 17
+			if (arrFields[position - 10] != diceValue && arrFields[position + 10] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 20 || position == 21 || position == 24 || position == 25 || position == 26) { //Spalten 3, 4, 8, 9, 10 / Felder 21, 22, 25, 26, 27
+			if (arrFields[position - 10] != diceValue && arrFields[position - 20] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 2 || position == 13) {														 //Spalten 5 und 6 / Felder 3 und 14
+			if (arrFields[position + 10] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 12 || position == 22) {														  //Spalten 5 und 6 / Felder 13 und 23
+			if (arrFields[position - 10] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 3) {																			   //Spalte 7 / Feld 4
+			if (arrFields[position + 20] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 23) {																			//Spalte 7 / Feld 24
+			if (arrFields[position - 20] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		}
+	}
 }
+
+//		Array																	Felder
+//           0   1   2   x   3   4   5   6   7   8									 1    2    3    x    4    5    6    7    8    9
+//       9  10  11  12  13   x  14  15  16  17  							   10   11   12   13   14    x   15   16   17   18
+//  18  19  20  21   x  22  23  24  25  26 								  19   20   21   22    x   23   24   25   26   27
+//
