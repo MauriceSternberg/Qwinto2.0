@@ -61,16 +61,16 @@ addListener ('standardEvent', function (event) {
 
 // Start
 
-addListener ('START', function (event) {
-	var stringFromServer = event.data;
-	var arr = stringFromServer.split (',');
-	playerMessage = arr [41];
-	document.getElementById ("Player").innerHTML = playerMessage;
-	if (arr[42] == "HOST") {
-		setVisible();
-	}
-	statusWait = false;
-});
+//addListener ('START', function (event) {
+//	var stringFromServer = event.data;
+//	var arr = stringFromServer.split (',');
+//	playerMessage = arr [41];
+//	document.getElementById ("Player").innerHTML = playerMessage;
+//	if (arr[42] == "HOST") {
+//		setVisible();
+//	}
+//	statusWait = false;
+//});
 
 // Playerleft
 
@@ -105,7 +105,7 @@ function updateGameState () {
 	sendDataToServer (sentFields);
 }
 
-// Feld zur�cksetzen
+// Feld zuruecksetzen
 
 function redraw () {
 	for ( var i = 0; i < 41; i++) {
@@ -128,7 +128,7 @@ function setVisible () {
 	document.getElementById ("closeButton").style.visibility = "visible";
 }
 
-// Spiel Schlie�en
+// Spiel Schliessen
 
 function closeGame () {
 	sendDataToServer ("CLOSE");
@@ -137,7 +137,7 @@ function closeGame () {
 
 
 
-// W�rfeln
+// Wuerfeln
 
 function roll_dice () {
 	if (Dice1 && !Dice2 && !Dice3) {
@@ -163,7 +163,7 @@ function roll_dice () {
 	diceValue=Dice1Value+Dice2Value+Dice3Value;
 }
 
-// Würfel wählen
+// Wuerfel waehlen
 
 function select_dice(){
 	var isRedDie_checked = document.getElementById("wuerfel_rot").checked;
@@ -175,14 +175,14 @@ function select_dice(){
 	
 }
 
-//Würfel-Counter
+//Wuerfel-Counter
 
 var try_count = 0;
 
-// Würfelfunktion
+// Wuerfelfunktion
 
 function dice_roll() {
-	//Würfelauswahl
+	//Wuerfelauswahl
 //	var redDie = false;
 //	var yellowDie = false;
 //	var purpleDie = false;
@@ -193,7 +193,7 @@ function dice_roll() {
 	
 	var sum_dice = 0;
 	
-	//Augenzahlen der Würfel
+	//Augenzahlen der Wuerfel
 	if(try_count == 0 || try_count == 1){
 		
 		if (redDie == true) {
@@ -212,11 +212,11 @@ function dice_roll() {
 			purpleDie_value = 0;
 		}
 		try_count += 1;
-		//Summe der Würfel
+		//Summe der Wuerfel
 		var sum_dice = redDie_value + yellowDie_value + purpleDie_value;
 		
 	} else {
-		alert('Du kannst nicht noch einmal würfeln!');
+		alert('Du kannst nicht noch einmal wuerfeln!');
 	}
 	
 	
@@ -226,14 +226,14 @@ function dice_roll() {
 
 function secondTry() {
 	if (try_count == 1){
-		//TODO:Würfel resetten
+		//TODO:Wuerfel resetten
 		
 		dice_roll();
 	}
 	
 }
 
-// Eingabe Best�tigen
+// Eingabe Bestaetigen
 
 function confirmInput () {
 	sendDataToServer ("CONFIRM");
