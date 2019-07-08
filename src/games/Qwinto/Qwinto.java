@@ -180,6 +180,29 @@ public class Qwinto extends Game {
 			return "CLOSE";
 		}
 		
+		if(eventName.equals("Restart")){
+			return "Cannot restart game once it was started.";
+		}
+		if(eventName.equals("START")) {
+			return "START";
+		}
+		
+		if(eventName.equals("EndofGame")) {
+			return "EndofGame";
+		}
+		
+		if(eventName.equals("standardEvent")) {
+			return "EndofGame";
+		}
+		
+		if(eventName.equals("NEW_PLAYER")) {
+			return "NEW_PLAYER" + user.getName();
+		}
+		
+		if(eventName.equals("WrongField")) {
+			return "Das Element darf hier nicht platziert werden";
+		}
+		
 		ArrayList<Board> boardList  = getBoardList();
 
 		/*for (int i = 0; i < boardList.size(); i++) {
