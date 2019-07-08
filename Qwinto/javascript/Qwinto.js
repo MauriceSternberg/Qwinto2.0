@@ -359,7 +359,7 @@ function setPosition () {
 function setField () {
 	fieldSet = false;
 	var row = true;
-	if (0 <= position <= 8) {
+	if (0 <= position && position <= 8) {
 		for (var i = 0; i <= 8; i++) {
 			if (arrFields[i] >= diceValue && i < position) {
 				alert("Die Zahl ist zu niedrig!");
@@ -371,7 +371,7 @@ function setField () {
 				break;
 			}
 		}
-	} else if (9 <= position <= 17) {
+	} else if (9 <= position && position <= 17) {
 		for (var i = 9; i <= 17; i++) {
 			if (arrFields[i] >= diceValue && i < position) {
 				alert("Die Zahl ist zu niedrig!");
@@ -383,7 +383,7 @@ function setField () {
 				break;
 			}
 		}
-	} else if (18 <= position <= 26) {
+	} else if (18 <= position && position <= 26) {
 		for (var i = 18; i <= 26; i++) {
 			if (arrFields[i] >= diceValue && i < position) {
 				alert("Die Zahl ist zu niedrig!");
