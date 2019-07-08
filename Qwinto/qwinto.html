@@ -1,7 +1,7 @@
 <html>
  <head>
  	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
- 	<script src="javascript/Qwinto.js"></script>
+
 	<script type="text/javascript">
 	var diceValue = 0;
 	var Dice1 = true;
@@ -47,57 +47,63 @@
 
 		function roll_dice () {
 		  //Nur beim ersten und zweiten Versuch wird das Skript ausgeführt
-		  if (wurf_count == 0 || wurf_count == 1){
-			  var c = document.getElementById("summe_wurf");
-			  var ctx = c.getContext("2d");
-			  var img = document.getElementById("white_img");
-			  ctx.drawImage(img,10,10);
-			  if (Dice1 && !Dice2 && !Dice3) {
-				Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }else if (Dice1 && Dice2 && !Dice3) {
-				Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-				Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }else if (Dice1 && !Dice2 && Dice3) {
-				Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-				Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }else if (!Dice1 && Dice2 && !Dice3) {
-				Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }else if (!Dice1 && Dice2 && Dice3) {
-				Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-				Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }else if (!Dice1 && !Dice2 && Dice3) {
-				Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }else if (Dice1 && Dice2 && Dice3) {
-				Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-				Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-				Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-			  }
-			  diceValue=Dice1Value+Dice2Value+Dice3Value;
-			  console.log(diceValue);
-			  img = document.getElementById(diceValue + "_img");
-			  ctx.drawImage(img,10,10);
+		  
 			  
-			  //Pop-Up für Wurf
-			  if (wurf_count == 0){
-				  var msg;
-				  var wurfbox = confirm("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
-				  	  //Erster Wurf bestätigt
-					  if (wurfbox == true) {
-					    alert("Du kannst nun die Zahl " + diceValue + " einsetzen.");
-					    wurf_count += 2;
-					  //Zweitversuch  
-					  } else {
-					   wurf_count +=1;
-					   alert("Zweiter Versuch!");
-					   roll_dice ();
-					   alert("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
-					   wurf_count +=1;
-					  }
-			  }
-			//Pop-Up wenn bereits gewürfelt wurde oder Zweitversuch stattgefunden hat  
-			} else {
-				alert("Du kannst nicht noch mal wuerfeln!");
-			}	  
+		  
+		  if (wurf_count == 0 || wurf_count == 1){
+			 
+				  var c = document.getElementById("summe_wurf");
+				  var ctx = c.getContext("2d");
+				  var img = document.getElementById("white_img");
+				  ctx.drawImage(img,10,10);
+				  if (Dice1 && !Dice2 && !Dice3) {
+					Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }else if (Dice1 && Dice2 && !Dice3) {
+					Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+					Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }else if (Dice1 && !Dice2 && Dice3) {
+					Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+					Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }else if (!Dice1 && Dice2 && !Dice3) {
+					Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }else if (!Dice1 && Dice2 && Dice3) {
+					Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+					Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }else if (!Dice1 && !Dice2 && Dice3) {
+					Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }else if (Dice1 && Dice2 && Dice3) {
+					Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+					Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+					Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+				  }
+				  diceValue=Dice1Value+Dice2Value+Dice3Value;
+				  console.log(diceValue);
+				  img = document.getElementById(diceValue + "_img");
+				  ctx.drawImage(img,10,10);
+				  
+				  //Pop-Up für Wurf
+				  if (wurf_count == 0){
+					  var msg;
+					  var wurfbox = confirm("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
+					  	  //Erster Wurf bestätigt
+						  if (wurfbox == true) {
+						    alert("Du kannst nun die Zahl " + diceValue + " einsetzen.");
+						    wurf_count += 2;
+						  //Zweitversuch  
+						  } else {
+						   wurf_count +=1;
+						   alert("Zweiter Versuch!");
+						   roll_dice ();
+						   alert("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
+						   wurf_count +=1;
+						  }
+				  }
+			  
+				//Pop-Up wenn bereits gewürfelt wurde oder Zweitversuch stattgefunden hat  
+				} else {
+					alert("Du kannst nicht noch mal wuerfeln!");
+				}	
+		  
 		}
 		  
 		function select (Feld) {
@@ -146,26 +152,52 @@
 				if (Dice1 == true) {
 					Dice1 = false;
 					Dice1Value = 0;
+					var c = document.getElementById("wuerfel_rot");
+					var ctx = c.getContext("2d");
+					var img = document.getElementById("grau_img");
+				  	ctx.drawImage(img,10,10);
 				} else if (Dice1 == false) {
 					Dice1 = true;
+					var c = document.getElementById("wuerfel_rot");
+					var ctx = c.getContext("2d");
+					var img = document.getElementById("rot_img");
+				  	ctx.drawImage(img,10,10);
 				}
 			} else if (DiceID == "wuerfel_gelb") {
 				if (Dice2 == true) {
 					Dice2 = false;
 					Dice2Value = 0;
+					var c = document.getElementById("wuerfel_gelb");
+					var ctx = c.getContext("2d");
+					var img = document.getElementById("grau_img");
+				  	ctx.drawImage(img,10,10);
 				} else if (Dice2 == false) {
 					Dice2 = true;
+					var c = document.getElementById("wuerfel_gelb");
+					var ctx = c.getContext("2d");
+					var img = document.getElementById("gelb_img");
+				  	ctx.drawImage(img,10,10);
 				}
 			} else if (DiceID == "wuerfel_lila") {
 				if (Dice3 == true) {
 					Dice3 = false;
 					Dice3Value = 0;
+					var c = document.getElementById("wuerfel_lila");
+					var ctx = c.getContext("2d");
+					var img = document.getElementById("grau_img");
+				  	ctx.drawImage(img,10,10);
 				} else if (Dice3 == false) {
 					Dice3 = true;
+					var c = document.getElementById("wuerfel_lila");
+					var ctx = c.getContext("2d");
+					var img = document.getElementById("lila_img");
+				  	ctx.drawImage(img,10,10);
 				}
 			}
 		}
 	</script>
+	
+	
 	
   <title>Qwinto - Spass fuer die ganze Familie</title>
  </head>
@@ -302,7 +334,7 @@
 <p>
 <button onclick="roll_dice()">Wuerfeln</button>
 <button onclick="second_try()">2. Versuch</button>
-<button onclick="confirmInput()">Zug bestaetigen</button>
+<button onclick="confirmInput()">Eingabe bestätigen</button>
 </p>
 
 <!-- Gegnerspielfeld -->
@@ -354,6 +386,11 @@
 <img src="images/wuerfel4.png" id="wuerfel4_img" style="display:none">
 <img src="images/wuerfel5.png" id="wuerfel5_img" style="display:none">
 <img src="images/wuerfel6.png" id="wuerfel6_img" style="display:none">
+
+<img src="images/grau.png" id="grau_img" style="display:none">
+<img src="images/gelb.png" id="gelb_img" style="display:none">
+<img src="images/rot.png" id="rot_img" style="display:none">
+<img src="images/lila.png" id="lila_img" style="display:none">
 
 </body>
 </html>
