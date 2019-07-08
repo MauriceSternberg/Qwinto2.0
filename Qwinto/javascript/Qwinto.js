@@ -12,6 +12,8 @@ var Dice2 = true;
 var Dice2Value = 0;
 var Dice3 = true;
 var Dice3Value = 0;
+var Selected = "rot1";
+var FeldID;
 var xImg = "/Qwinto/images/x.png";
 var iImg = "/Qwinto/images/i.png";
 var Img1 = "/Qwinto/images/1.png";
@@ -98,6 +100,29 @@ function initFields () {
 	}
 }
 
+function draw_spielfeld() {
+//Hintergrund
+	var c = document.getElementById("spielfeld_bg");
+	var ctx = c.getContext("2d");
+	var img = document.getElementById("spielfeld_img");
+	ctx.drawImage(img,10,10);
+	//Roter Würfel
+	var w1 = document.getElementById("wuerfel_rot");
+	var wtx1 = w1.getContext("2d");
+	var img1 = document.getElementById("wuerfel1_img");
+	wtx1.drawImage(img1,10,10);
+	//Gelber Würfel
+	var w2 = document.getElementById("wuerfel_gelb");
+	var wtx2 = w2.getContext("2d");
+	var img2 = document.getElementById("wuerfel2_img");
+	wtx2.drawImage(img2,10,10);
+	//Lila Würfel
+	var w3 = document.getElementById("wuerfel_lila");
+	var wtx3 = w3.getContext("2d");
+	var img3 = document.getElementById("wuerfel3_img");
+	wtx3.drawImage(img3,10,10);
+}
+
 // Spiel Status Aktualisieren
 
 function updateGameState () {
@@ -139,104 +164,156 @@ function closeGame () {
 
 // Wuerfeln
 
+var wurf_count = 0;
+
 function roll_dice () {
-	if (Dice1 && !Dice2 && !Dice3) {
-		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}else if (Dice1 && Dice2 && !Dice3) {
-		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}else if (Dice1 && !Dice2 && Dice3) {
-		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}else if (!Dice1 && Dice2 && !Dice3) {
-		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}else if (!Dice1 && Dice2 && Dice3) {
-		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}else if (!Dice1 && !Dice2 && Dice3) {
-		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}else if (Dice1 && Dice2 && Dice3) {
-		Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-		Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-		Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
-	}
-	diceValue=Dice1Value+Dice2Value+Dice3Value;
+ //Nur beim ersten und zweiten Versuch wird das Skript ausgeführt
+	if (wurf_count == 0 || wurf_count == 1){
+		var c = document.getElementById("summe_wurf");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("white_img");
+		ctx.drawImage(img,10,10);
+		if (Dice1 && !Dice2 && !Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}else if (Dice1 && Dice2 && !Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}else if (Dice1 && !Dice2 && Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}else if (!Dice1 && Dice2 && !Dice3) {
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}else if (!Dice1 && Dice2 && Dice3) {
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}else if (!Dice1 && !Dice2 && Dice3) {
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}else if (Dice1 && Dice2 && Dice3) {
+			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		}
+		diceValue=Dice1Value+Dice2Value+Dice3Value;
+		img = document.getElementById(diceValue + "_img");
+		ctx.drawImage(img,10,10);
+			  
+		//Pop-Up für Wurf
+		if (wurf_count == 0){
+			var msg;
+			var wurfbox = confirm("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
+			//Erster Wurf bestätigt
+			if (wurfbox == true) {
+				alert("Du kannst nun die Zahl " + diceValue + " einsetzen.");
+				wurf_count += 2;
+				//Zweitversuch  
+			} else {
+				wurf_count +=1;
+				alert("Zweiter Versuch!");
+				roll_dice ();
+				alert("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
+				wurf_count +=1;
+			}
+		}
+			  
+		//Pop-Up wenn bereits gewürfelt wurde oder Zweitversuch stattgefunden hat  
+		} else {
+			alert("Du kannst nicht noch mal wuerfeln!");
+		}	  
 }
 
 // Wuerfel waehlen
 
-function select_dice(){
-	var isRedDie_checked = document.getElementById("wuerfel_rot").checked;
-	var isYellowDie_checked = document.getElementById("wuerfel_gelb").checked;
-	var isPurpleDie_checked = document.getElementById("wuerfel_lila").checked;
-	console.log(isRedDie_checked);
-	console.log(isYellowDie_checked);
-	console.log(isPurpleDie_checked);
-	
-}
-
-//Wuerfel-Counter
-
-var try_count = 0;
-
-// Wuerfelfunktion
-
-function dice_roll() {
-	//Wuerfelauswahl
-//	var redDie = false;
-//	var yellowDie = false;
-//	var purpleDie = false;
-	
-	var redDie_value = 0;
-	var yellowDie_value = 0;
-	var purpleDie_value = 0;
-	
-	var sum_dice = 0;
-	
-	//Augenzahlen der Wuerfel
-	if(try_count == 0 || try_count == 1){
-		
-		if (redDie == true) {
-			redDie_value = (int)(Math.random() * 6) + 1; 
-		} else {
-			redDie_value = 0;
+function selectDice (Dice) {
+	var DiceID = Dice.id;
+	if (DiceID == "wuerfel_rot") {
+		if (Dice1 == true) {
+			Dice1 = false;
+			Dice1Value = 0;
+			var c = document.getElementById("wuerfel_rot");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById("grau_img");
+		  	ctx.drawImage(img,10,10);
+		} else if (Dice1 == false) {
+			Dice1 = true;
+			var c = document.getElementById("wuerfel_rot");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById("rot_img");
+		  	ctx.drawImage(img,10,10);
 		}
-		if (yellowDie == true) {
-			yellowDie_value = (int)(Math.random() * 6) + 1; 
-		} else {
-			yellowDie_value = 0;
+	} else if (DiceID == "wuerfel_gelb") {
+		if (Dice2 == true) {
+			Dice2 = false;
+			Dice2Value = 0;
+			var c = document.getElementById("wuerfel_gelb");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById("grau_img");
+			ctx.drawImage(img,10,10);
+		} else if (Dice2 == false) {
+			Dice2 = true;
+			var c = document.getElementById("wuerfel_gelb");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById("gelb_img");
+		  	ctx.drawImage(img,10,10);
 		}
-		if (purpleDie == true) {
-			purpleDie_value = (int)(Math.random() * 6) + 1; 
-		} else {
-			purpleDie_value = 0;
+	} else if (DiceID == "wuerfel_lila") {
+		if (Dice3 == true) {
+			Dice3 = false;
+			Dice3Value = 0;
+			var c = document.getElementById("wuerfel_lila");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById("grau_img");
+		  	ctx.drawImage(img,10,10);
+		} else if (Dice3 == false) {
+			Dice3 = true;
+			var c = document.getElementById("wuerfel_lila");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById("lila_img");
+			ctx.drawImage(img,10,10);
 		}
-		try_count += 1;
-		//Summe der Wuerfel
-		var sum_dice = redDie_value + yellowDie_value + purpleDie_value;
-		
-	} else {
-		alert('Du kannst nicht noch einmal wuerfeln!');
 	}
-	
-	
-}
-
-// 2. Wurf
-
-function secondTry() {
-	if (try_count == 1){
-		//TODO:Wuerfel resetten
-		
-		dice_roll();
-	}
-	
 }
 
 // Eingabe Bestaetigen
 
 function confirmInput () {
-	sendDataToServer ("CONFIRM");
+	var c = document.getElementById(Selected);
+	var ctx = c.getContext("2d");
+	if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
+		var img = document.getElementById("whitep_img");
+	} else {
+		var img = document.getElementById("whitec_img");
+	}
+	ctx.drawImage(img,10,10);
+	var img = document.getElementById(diceValue + "_img");
+	ctx.drawImage(img,10,10);
+	Selected = "t";
+}
+
+// Feld waehlen
+function select (Feld) {
+	if (Selected == "rot2" || Selected == "rot5" || Selected == "gelb7" || Selected == "lila3" || Selected == "lila9") {
+	 	var c = document.getElementById(Selected);
+		var ctx = c.getContext("2d");
+	  	var img = document.getElementById("whitep_img");
+	  	ctx.drawImage(img,10,10);
+	} else if (Selected == "t") {
+	  	var img = document.getElementById("transparent_img");
+	} else {
+	  	var img = document.getElementById("whitec_img");
+	  	var c = document.getElementById(Selected);
+	 	var ctx = c.getContext("2d");
+	 	ctx.drawImage(img,10,10);
+	}
+	var FeldID = Feld.id;
+	c = document.getElementById(FeldID);
+	ctx = c.getContext("2d");
+	if (FeldID == "rot2" || FeldID == "rot5" || FeldID == "gelb7" || FeldID == "lila3" || FeldID == "lila9") {
+	 	img = document.getElementById("selectp_img");
+	} else {
+	  	img = document.getElementById("selectc_img");
+	}
+	ctx.drawImage(img,10,10);
+	Selected = FeldID;
 }
 
 // Feld setzen
