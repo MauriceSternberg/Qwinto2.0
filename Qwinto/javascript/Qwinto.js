@@ -77,17 +77,17 @@ function draw_spielfeld() {
 	var ctx = c.getContext("2d");
 	var img = document.getElementById("spielfeld_img");
 	ctx.drawImage(img,10,10);
-	//Roter Würfel
+	//Roter Wuerfel
 	var w1 = document.getElementById("wuerfel_rot");
 	var wtx1 = w1.getContext("2d");
 	var img1 = document.getElementById("wuerfel1_img");
 	wtx1.drawImage(img1,10,10);
-	//Gelber Würfel
+	//Gelber Wuerfel
 	var w2 = document.getElementById("wuerfel_gelb");
 	var wtx2 = w2.getContext("2d");
 	var img2 = document.getElementById("wuerfel2_img");
 	wtx2.drawImage(img2,10,10);
-	//Lila Würfel
+	//Lila Wuerfel
 	var w3 = document.getElementById("wuerfel_lila");
 	var wtx3 = w3.getContext("2d");
 	var img3 = document.getElementById("wuerfel3_img");
@@ -135,7 +135,7 @@ function closeGame () {
 var wurf_count = 0;
 
 function roll_dice () {
- //Nur beim ersten und zweiten Versuch wird das Skript ausgeführt
+ //Nur beim ersten und zweiten Versuch wird das Skript ausgefuehrt
 	if (wurf_count == 0 || wurf_count == 1){
 		var c = document.getElementById("summe_wurf");
 		var ctx = c.getContext("2d");
@@ -165,7 +165,7 @@ function roll_dice () {
 		img = document.getElementById(diceValue + "_img");
 		ctx.drawImage(img,10,10);
 			  
-		//Pop-Up für Wurf
+		//Pop-Up fuer Wurf
 		if (wurf_count == 0){
 			var msg;
 			var wurfbox = confirm("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
@@ -183,7 +183,7 @@ function roll_dice () {
 			}
 		}
 			  
-		//Pop-Up wenn bereits gewürfelt wurde oder Zweitversuch stattgefunden hat  
+		//Pop-Up wenn bereits gewuerfelt wurde oder Zweitversuch stattgefunden hat  
 		} else {
 			alert("Du kannst nicht noch mal wuerfeln!");
 		}	  
