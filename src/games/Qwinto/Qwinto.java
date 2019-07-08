@@ -43,7 +43,7 @@ public class Qwinto extends Game {
 	public String getSite() {
 		// TODO Auto-generated method stub
 		try {
-			return FileHelper.getFile("Qwinto/Qwinto.html");
+			return FileHelper.getFile("Qwinto/qwinto.html");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
