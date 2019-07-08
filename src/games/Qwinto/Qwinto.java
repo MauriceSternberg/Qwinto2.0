@@ -27,7 +27,7 @@ public class Qwinto extends Game {
 	private ArrayList<Board> boardList = new ArrayList<Board>();
 	private ArrayList<Field> fields;
 	private int turnCounter = 0;
-	private int fehlWürfe = 0;
+	private int fehlWuerfe = 0;
 	private String playerLeft = null;
 	
 	
@@ -43,7 +43,7 @@ public class Qwinto extends Game {
 	public String getSite() {
 		// TODO Auto-generated method stub
 		try {
-			return FileHelper.getFile("Qwinto/Qwinto.html");
+			return FileHelper.getFile("Qwinto/qwinto.html");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -227,7 +227,7 @@ public class Qwinto extends Game {
 		}
 
 		if (this.gState == GameState.FINISHED) {
-			if (fehlWürfe == 4){
+			if (fehlWuerfe == 4){
 				gameData += "Unentschieden!";
 				gameData += isHost(user);
 				return gameData;
