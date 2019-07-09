@@ -315,7 +315,27 @@ function confirmInput () {
 // Zug beenden / Pass
 
 function endTurn () {
-	Dice1Value = 0;
+	var i = 100;
+	if (i > diceValue) { 		//Platzhalter!!!!!				Abfrage ob Spieler aktuell am Zug ist
+		Dice1Value = 0;
+		Dice2Value = 0;
+		Dice3Value = 0;
+		wurf_count = 0;
+		failrolls = failrolls + 1;
+		var c = document.getElementById("fehl" + failrolls);
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("kreuz_img");
+		ctx.drawImage(img,10,10);
+		if (failrolls == 4) {
+			alert("Game Over!");
+		}
+		arrFields[27 + failrolls] = 1;
+		c = document.getElementById("summe_wurf");
+		ctx = c.getContext("2d");
+		img = document.getElementById("white_img");
+		ctx.drawImage(img,10,10);
+	} else {
+		Dice1Value = 0;
 		Dice2Value = 0;
 		Dice3Value = 0;
 		wurf_count = 0;
@@ -323,6 +343,7 @@ function endTurn () {
 		var ctx = c.getContext("2d");
 		var img = document.getElementById("white_img");
 		ctx.drawImage(img,10,10);
+	}
 }
 
 // Feld waehlen
