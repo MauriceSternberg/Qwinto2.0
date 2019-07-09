@@ -16,6 +16,8 @@ var Selected = "rot1";
 var FeldID;
 var position = 0;
 var fieldSet;
+var failrolls = 0;
+var PlayerStatus = "own turn";
 
 // Standard Event
 
@@ -58,7 +60,6 @@ addListener ('standardEvent', function (event) {
 
 // Playerleft
 
-
 addListener ('PLAYERLEFT', function (event) {
 	var stringFromServer = event.data;
 	playerMessage = stringFromServer;
@@ -72,6 +73,7 @@ addListener ('CLOSE', function (event) {
 });
 
 // Feld initialisieren
+
 function draw_spielfeld() {
 //Hintergrund
 	var c = document.getElementById("spielfeld_bg");
@@ -96,6 +98,7 @@ function draw_spielfeld() {
 }
 
 //beim Laden der Seite das Spielfeld erstellen
+
 window.onload = function() {
 	draw_spielfeld();
 	}
@@ -302,10 +305,24 @@ function confirmInput () {
 		ctx.drawImage(img,10,10);
 		document.getElementById(Selected + "_locked").style.zIndex = 2;
 		Selected = "t";
+		endTurn();
 	}
 	for (var i = 0; i < arrFields.length; i++) {
 		console.log(i);
 	}
+}
+
+// Zug beenden / Pass
+
+function endTurn () {
+	Dice1Value = 0;
+		Dice2Value = 0;
+		Dice3Value = 0;
+		wurf_count = 0;
+		var c = document.getElementById("summe_wurf");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("white_img");
+		ctx.drawImage(img,10,10);
 }
 
 // Feld waehlen
