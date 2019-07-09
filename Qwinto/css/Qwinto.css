@@ -2,7 +2,7 @@
 .tabs figure { 
    display: block; 
    margin-left: 0; 
-   border-bottom: 1px solid black;
+   border-bottom: 1px solid white;
    clear: both;
 }
 
@@ -10,11 +10,11 @@
 .tabs figure > div { display: none; }
 
 .tabs figure>div {
-  padding: 20px;
-  width: 1220px; 
-  height:840px;
-  border: 1px solid black;
-  background: #fff;
+  padding: 5px;
+  width: 1200px; 
+  height:640px;
+  border: 1px solid white;
+
   line-height: 1.5em;
   letter-spacing: 0.3px;
   color: #444;
@@ -29,13 +29,13 @@
 nav label {
    float: left;
    padding: 15px 15px;
-   border-top: 1px solid black;
+   border-top: 1px solidwhite;
    border-right: 1px solid black;
    background: hsl(217,15%,83%);
    color: #000000;
 }
 
-nav label:nth-child(1) { border-left: 1px solid black; }
+nav label:nth-child(1) { border-left: 1px solid white; }
 nav label:hover { background: hsl(220,7%,67%); }
 nav label:active { background: #ffffff; }
 
@@ -60,7 +60,7 @@ nav label:active { background: #ffffff; }
   position: absolute;
   height: 2px;
   width: 100%;
-  background: white;
+
   left: 0;
   bottom: -1px;
 }

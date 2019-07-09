@@ -72,7 +72,6 @@ addListener ('CLOSE', function (event) {
 });
 
 // Feld initialisieren
-
 function draw_spielfeld() {
 //Hintergrund
 	var c = document.getElementById("spielfeld_bg");
@@ -95,6 +94,11 @@ function draw_spielfeld() {
 	var img3 = document.getElementById("wuerfel3_img");
 	wtx3.drawImage(img3,10,10);
 }
+
+//beim Laden der Seite das Spielfeld erstellen
+window.onload = function() {
+	draw_spielfeld();
+	}
 
 // Spiel Status Aktualisieren
 
