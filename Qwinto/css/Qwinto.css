@@ -64,3 +64,10 @@ nav label:active { background: #ffffff; }
   left: 0;
   bottom: -1px;
 }
+
+.game_button {
+	font-size: 20px;
+	padding: 15px 32px;
+	text-align: center;
+	margin: 4px 2px;	
+}

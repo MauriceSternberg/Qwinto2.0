@@ -171,7 +171,7 @@ function roll_dice () {
 		if (wurf_count == 0){
 			var msg;
 			var wurfbox = confirm("Rot: " + Dice1Value + "\r\nGelb: " + Dice2Value + "\r\nLila: " + Dice3Value + "\r\nGesamt: " + diceValue);
-			//Erster Wurf bestätigt
+			//Erster Wurf bestaetigt
 			if (wurfbox == true) {
 				alert("Du kannst nun die Zahl " + diceValue + " einsetzen.");
 				wurf_count += 2;
@@ -259,6 +259,7 @@ function confirmInput () {
 		ctx.drawImage(img,10,10);
 		var img = document.getElementById(diceValue + "_img");
 		ctx.drawImage(img,10,10);
+		document.getElementById(Selected + "_locked").style.zIndex = 2;
 		Selected = "t";
 	}
 	for (var i = 0; i < arrFields.length; i++) {
@@ -292,6 +293,7 @@ function select (Feld) {
 	}
 	ctx.drawImage(img,10,10);
 	Selected = FeldID;
+	
 }
 
 // Position

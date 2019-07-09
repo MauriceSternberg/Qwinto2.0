@@ -6,7 +6,7 @@
 
 <body>
 
-<p><button onClick="draw_spielfeld()">Erstellen</button></p>
+<p><button onClick="draw_spielfeld()">Spielfeld erstellen</button></p>
 <div style="position: relative; width: 1220px; height:840px;">
 
    <!-- Spielfeld Hintergrund -->
@@ -14,7 +14,7 @@
    style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
    
    <!-- Rote Felder -->
-   <a href="#" onclick="select(rot1)"><canvas id="rot1" width="75pxpx" height="75px" 
+   <a href="#" onclick="select(rot1)"><canvas id="rot1" width="75px" height="75px" 
    style="position: absolute; left: 213px; top: 20px; z-index: 1;"></canvas></a>
    <a href="#" onclick="select(rot2)"><canvas id="rot2" width="75px" height="75px" 
    style="position: absolute; left: 309px; top: 20px; z-index: 1;"></canvas></a>
@@ -126,7 +126,63 @@
    <canvas id="summe_wurf" width="90px" height="90px" 
    style="position: absolute; left: 431px; top: 679px; z-index: 1;"></canvas>
    
-   <!-- Buttons -->
+    <!-- Locked Fields -->
+	<canvas id="rot1_locked" width="75pxpx" height="75px" 
+	   style="position: absolute; left: 213px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot2_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 309px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot3_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 405px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot4_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 597px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot5_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 693px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot6_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 789px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot7_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 884px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot8_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 980px; top: 20px; z-index: 0;"></canvas>
+	<canvas id="rot9_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 1076px; top: 20px; z-index: 0;"></canvas>
+	   
+	<canvas id="gelb1_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 117px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb2_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 213px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb3_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 309px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb4_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 405px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb5_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 501px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb6_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 693px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb7_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 789px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb8_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 884px; top: 142px; z-index: 0;"></canvas>
+	<canvas id="gelb9_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 980px; top: 142px; z-index: 0;"></canvas>
+	   
+	   <canvas id="lila1_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 21px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila2_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 117px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila3_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 213px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila4_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 309px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila5_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 501px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila6_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 597px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila7_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 693px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila8_locked" width="75px" height="75px" 
+	   style="position: absolute; left: 789px; top: 267px; z-index: 0;"></canvas>
+	<canvas id="lila9_locked" width="75" height="75px" 
+	   style="position: absolute; left: 884px; top: 267px; z-index: 0;"></canvas>
 
    
    
@@ -134,9 +190,9 @@
 
 <!-- Buttons -->
 <p>
-<button onclick="roll_dice()">Wuerfeln</button>
-<button onclick="second_try()">2. Versuch</button>
-<button onclick="confirmInput()">Eingabe bestätigen</button>
+<button class="game_button" onclick="roll_dice()">Wuerfeln</button>
+<button class="game_button" onclick="confirmInput()">Eingabe bestätigen</button>
+<button class="game_button" onClick="#">Zug beenden</button>
 </p>
 
 <!-- Gegnerspielfeld -->
