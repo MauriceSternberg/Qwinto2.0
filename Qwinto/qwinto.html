@@ -126,6 +126,15 @@
    <canvas id="summe_wurf" width="90px" height="90px" 
    style="position: absolute; left: 431px; top: 679px; z-index: 1;"></canvas>
    
+   <!-- Buttons -->
+   <a href="#" onclick="roll_dice()"><canvas id="button_wuerfeln" width="179px" height="90px" 
+   style="position: absolute; left: 611px; top: 685px; z-index: 1;"></canvas></a>
+   <a href="#" onclick="confirmInput()"><canvas id="button_confirm" width="179px" height="90px" 
+   style="position: absolute; left: 816px; top: 685px; z-index: 1;"></canvas></a>
+   <a href="#" onclick="#"><canvas id="button_pass" width="179px" height="90px" 
+   style="position: absolute; left: 1021px; top: 685px; z-index: 1;"></canvas></a>
+   
+   
     <!-- Locked Fields -->
 	<canvas id="rot1_locked" width="75pxpx" height="75px" 
 	   style="position: absolute; left: 213px; top: 20px; z-index: 0;"></canvas>
@@ -189,12 +198,12 @@
 </div>
 
 <!-- Buttons -->
-<p>
+<!-- <p>
 <button class="game_button" onclick="roll_dice()">Wuerfeln</button>
 <button class="game_button" onclick="confirmInput()">Eingabe bestätigen</button>
 <button class="game_button" onClick="#">Zug beenden / Passen</button>
 </p>
-
+ -->
 <!-- Gegnerspielfeld -->
 <div class="tabs">
 
@@ -211,7 +220,7 @@
 </div>
 
 <!-- Bilder -->
-<img src="images/spielfeld1.png" id="spielfeld_img" style="display:none">
+<img src="images/spielfeld.png" id="spielfeld_img" style="display:none">
 
 <img src="images/1.png" id="1_img" style="display:none">
 <img src="images/2.png" id="2_img" style="display:none">
