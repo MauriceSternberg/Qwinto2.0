@@ -195,50 +195,87 @@ function roll_dice () {
 
 function selectDice (Dice) {
 	var DiceID = Dice.id;
+	
 	if (DiceID == "wuerfel_rot") {
 		if (Dice1 == true) {
 			Dice1 = false;
 			Dice1Value = 0;
+			var zhl = 1;
 			var c = document.getElementById("wuerfel_rot");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById("grau_img");
 		  	ctx.drawImage(img,10,10);
+		    //Farbe sperren
+			while (zhl < 10){
+				document.getElementById("rot" + zhl).style.zIndex = 0;
+				zhl++;
+			}
 		} else if (Dice1 == false) {
 			Dice1 = true;
+			var zhl = 1;
 			var c = document.getElementById("wuerfel_rot");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById("rot_img");
 		  	ctx.drawImage(img,10,10);
+		    //Farbe entsperren
+			while (zhl < 10){
+				document.getElementById("rot" + zhl).style.zIndex = 1;
+				zhl++;
+			}
 		}
 	} else if (DiceID == "wuerfel_gelb") {
 		if (Dice2 == true) {
 			Dice2 = false;
 			Dice2Value = 0;
+			var zhl = 1;
 			var c = document.getElementById("wuerfel_gelb");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById("grau_img");
 			ctx.drawImage(img,10,10);
+			//Farbe sperren
+			while (zhl < 10){
+				document.getElementById("gelb" + zhl).style.zIndex = 0;
+				zhl++;
+			}
 		} else if (Dice2 == false) {
 			Dice2 = true;
+			var zhl = 1;
 			var c = document.getElementById("wuerfel_gelb");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById("gelb_img");
 		  	ctx.drawImage(img,10,10);
+		  	//Farbe entsperren
+			while (zhl < 10){
+				document.getElementById("gelb" + zhl).style.zIndex = 1;
+				zhl++;
+			}
 		}
 	} else if (DiceID == "wuerfel_lila") {
 		if (Dice3 == true) {
 			Dice3 = false;
 			Dice3Value = 0;
+			var zhl = 1;
 			var c = document.getElementById("wuerfel_lila");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById("grau_img");
 		  	ctx.drawImage(img,10,10);
+		    //Farbe sperren
+			while (zhl < 10){
+				document.getElementById("lila" + zhl).style.zIndex = 0;
+				zhl++;
+			}
 		} else if (Dice3 == false) {
 			Dice3 = true;
+			var zhl = 1;
 			var c = document.getElementById("wuerfel_lila");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById("lila_img");
 			ctx.drawImage(img,10,10);
+			//Farbe entsperren
+			while (zhl < 10){
+				document.getElementById("lila" + zhl).style.zIndex = 1;
+				zhl++;
+			}
 		}
 	}
 }
