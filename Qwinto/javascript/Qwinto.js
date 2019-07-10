@@ -18,6 +18,7 @@ var position = 0;
 var fieldSet;
 var failrolls = 0;
 var PlayerStatus = "own turn";
+var endResult = 0;
 
 // Standard Event
 
@@ -312,11 +313,19 @@ function confirmInput () {
 	}
 }
 
-// Zug beenden / Pass
+// Pass
+
+function pass () {
+	diceValue = 101;
+	endTurn();
+}
+
+// Zug beenden
 
 function endTurn () {
 	var i = 100;
-	if (i > diceValue) { 		//Platzhalter!!!!!				Abfrage ob Spieler aktuell am Zug ist
+	if (i < diceValue) { 		//Platzhalter!!!!!				Abfrage ob Spieler aktuell am Zug ist
+		diceValue = 0;
 		Dice1Value = 0;
 		Dice2Value = 0;
 		Dice3Value = 0;
@@ -325,16 +334,19 @@ function endTurn () {
 		var c = document.getElementById("fehl" + failrolls);
 		var ctx = c.getContext("2d");
 		var img = document.getElementById("kreuz_img");
-		ctx.drawImage(img,10,10);
+		ctx.drawImage(img,0,0);
+		arrFields[26 + failrolls] = 1;
 		if (failrolls == 4) {
 			alert("Game Over!");
+			calculateResult();
+			alert("Your Points: " + endResult + "!");
 		}
-		arrFields[27 + failrolls] = 1;
 		c = document.getElementById("summe_wurf");
 		ctx = c.getContext("2d");
 		img = document.getElementById("white_img");
 		ctx.drawImage(img,10,10);
 	} else {
+		diceValue = 0;
 		Dice1Value = 0;
 		Dice2Value = 0;
 		Dice3Value = 0;
@@ -344,6 +356,136 @@ function endTurn () {
 		var img = document.getElementById("white_img");
 		ctx.drawImage(img,10,10);
 	}
+}
+
+// Ergebnis Berechnung
+
+function calculateResult () {
+	var redRow = 0;
+	var redComplete = true;
+	var count = 0;
+	for (var i = 0; i <= 8; i++) {
+		if (arrFields[i] != 0) {
+			redRow = redRow + arrFields[i];
+			count = count + 1;
+		} else if (arrFields [i] == 0) {
+			redComplete = false;
+		}
+		if (redComplete == false) {
+			redRow = count;
+		}
+	}
+	if (redRow >= 1 && redRow <= 18) {
+		var c = document.getElementById("rot_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById(redRow + "_img");
+		ctx.drawImage(img,10,10);
+	}
+	
+	var yellowRow = 0;
+	var yellowComplete = true;
+	count = 0;
+	for (var i = 9; i <= 17; i++) {
+		if (arrFields[i] != 0) {
+			yellowRow = yellowRow + arrFields[i];
+			count = count + 1;
+		} else if (arrFields [i] == 0) {
+			yellowComplete = false;
+		}
+		if (yellowComplete == false) {
+			yellowRow = count;
+		}
+	}
+	if (yellowRow >= 1 && yellowRow <= 18) {
+		var c = document.getElementById("gelb_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById(yellowRow + "_img");
+		ctx.drawImage(img,10,10);
+	}
+	
+	var purpleRow = 0;
+	var purpleComplete = true;
+	count = 0;
+	for (var i = 18; i <= 26; i++) {
+		if (arrFields[i] != 0) {
+			purpleRow = purpleRow + arrFields[i];
+			count = count + 1;
+		} else if (arrFields [i] == 0) {
+			purpleComplete = false;
+		}
+		if (purpleComplete == false) {
+			purpleRow = count;
+		}
+	}
+	if (purpleRow >= 1 && purpleRow <= 18) {
+		var c = document.getElementById("lila_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById(purpleRow + "_img");
+		ctx.drawImage(img,10,10);
+	}
+	
+	var bonus1 = 0;
+	var bonus2 = 0;
+	var bonus3 = 0;
+	var bonus4 = 0;
+	var bonus5 = 0;
+	if (arrFields[0] !=0 && arrFields[10] !=0 && arrFields[20] != 0) {
+		bonus1 = arrFields[20];
+		if (bonus1 >= 1 && bonus1 <= 18) {
+			var c = document.getElementById("bonus1");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById(bonus1 + "_img");
+			ctx.drawImage(img,10,10);
+		}
+	}
+	if (arrFields[1] !=0 && arrFields[11] !=0 && arrFields[21] != 0) {
+		bonus2 = arrFields[1];
+		if (bonus2 >= 1 && bonus2 <= 18) {
+			var c = document.getElementById("bonus2");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById(bonus2 + "_img");
+			ctx.drawImage(img,10,10);
+		}
+	}
+	if (arrFields[4] !=0 && arrFields[14] !=0 && arrFields[24] != 0) {
+		bonus3 = arrFields[4];
+		if (bonus3 >= 1 && bonus3 <= 18) {
+			var c = document.getElementById("bonus3");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById(bonus3 + "_img");
+			ctx.drawImage(img,10,10);
+		}
+	}
+	if (arrFields[5] !=0 && arrFields[15] !=0 && arrFields[25] != 0) {
+		bonus4 = arrFields[15];
+		if (bonus4 >= 1 && bonus2 <= 18) {
+			var c = document.getElementById("bonus4");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById(bonus4 + "_img");
+			ctx.drawImage(img,10,10);
+		}
+	}
+	if (arrFields[6] !=0 && arrFields[16] !=0 && arrFields[26] != 0) {
+		bonus5 = arrFields[26];
+		if (bonus5 >= 1 && bonus5 <= 18) {
+			var c = document.getElementById("bonus5");
+			var ctx = c.getContext("2d");
+			var img = document.getElementById(bonus5 + "_img");
+			ctx.drawImage(img,10,10);
+		}
+	}
+	var minuspoints = 0;
+	minuspoints = (arrFields[27] * (-5)) + (arrFields[28] * (-5)) + (arrFields[29] * (-5)) + (arrFields[30] * (-5));
+	alert(redRow);
+	alert(yellowRow);
+	alert(purpleRow);
+	alert(bonus1);
+	alert(bonus2);
+	alert(bonus3);
+	alert(bonus4);
+	alert(bonus5);
+	alert(minuspoints);
+	endResult = redRow + yellowRow + purpleRow + bonus1 + bonus2 + bonus3 + bonus4 + bonus5 + minuspoints;
 }
 
 // Feld waehlen
@@ -516,15 +658,29 @@ function setField () {
 			} else {
 				alert("Zahl ist bereits in dieser Spalte vorhanden!");
 			}
-		} else if (position == 2 || position == 13) {														 //Spalten 5 und 6 / Felder 3 und 14
+		} else if (position == 2) {															 //Spalte 5  / Feld 3
 			if (arrFields[position + 10] != diceValue) {
 				arrFields[position] = diceValue;
 				fieldSet = true;
 			} else {
 				alert("Zahl ist bereits in dieser Spalte vorhanden!");
 			}
-		} else if (position == 12 || position == 22) {														  //Spalten 5 und 6 / Felder 13 und 23
+		} else if (position == 13) {														 //Spalte 6 / Felde 14
+			if (arrFields[position + 9] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 12) {														  //Spalten 5  / Feld 13 
 			if (arrFields[position - 10] != diceValue) {
+				arrFields[position] = diceValue;
+				fieldSet = true;
+			} else {
+				alert("Zahl ist bereits in dieser Spalte vorhanden!");
+			}
+		} else if (position == 22) {														   //Spalten  6 / Feld 23
+			if (arrFields[position - 9] != diceValue) {
 				arrFields[position] = diceValue;
 				fieldSet = true;
 			} else {
