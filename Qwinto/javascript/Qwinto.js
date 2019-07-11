@@ -170,6 +170,9 @@ function roll_dice () {
 			Dice1Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 			Dice2Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
 			Dice3Value=Math.floor(Math.random() * (6 - 1 + 1)) + 1;
+		} else {
+			alert('Du musst mindestens einen Wuerfel auswaehlen!');
+			return;
 		}
 		diceValue=Dice1Value+Dice2Value+Dice3Value;
 		img = document.getElementById(diceValue + "_img");
