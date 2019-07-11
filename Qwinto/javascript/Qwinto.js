@@ -339,7 +339,6 @@ function endTurn () {
 		if (failrolls == 4) {
 			alert("Game Over!");
 			calculateResult();
-			alert("Your Points: " + endResult + "!");
 		}
 		c = document.getElementById("summe_wurf");
 		ctx = c.getContext("2d");
@@ -375,7 +374,7 @@ function calculateResult () {
 			redRow = count;
 		}
 	}
-	if (redRow >= 1 && redRow <= 18) {
+	if (redRow >= 0 && redRow <= 20) {
 		var c = document.getElementById("rot_gesamt");
 		var ctx = c.getContext("2d");
 		var img = document.getElementById(redRow + "_img");
@@ -396,7 +395,7 @@ function calculateResult () {
 			yellowRow = count;
 		}
 	}
-	if (yellowRow >= 1 && yellowRow <= 18) {
+	if (yellowRow >= 0 && yellowRow <= 20) {
 		var c = document.getElementById("gelb_gesamt");
 		var ctx = c.getContext("2d");
 		var img = document.getElementById(yellowRow + "_img");
@@ -417,7 +416,7 @@ function calculateResult () {
 			purpleRow = count;
 		}
 	}
-	if (purpleRow >= 1 && purpleRow <= 18) {
+	if (purpleRow >= 0 && purpleRow <= 20) {
 		var c = document.getElementById("lila_gesamt");
 		var ctx = c.getContext("2d");
 		var img = document.getElementById(purpleRow + "_img");
@@ -431,61 +430,137 @@ function calculateResult () {
 	var bonus5 = 0;
 	if (arrFields[0] !=0 && arrFields[10] !=0 && arrFields[20] != 0) {
 		bonus1 = arrFields[20];
-		if (bonus1 >= 1 && bonus1 <= 18) {
+		if (bonus1 >= 0 && bonus1 <= 20) {
 			var c = document.getElementById("bonus1");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById(bonus1 + "_img");
 			ctx.drawImage(img,10,10);
 		}
+	} else {
+		var c = document.getElementById("bonus1");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("0_img");
+		ctx.drawImage(img,10,10);
 	}
+	
 	if (arrFields[1] !=0 && arrFields[11] !=0 && arrFields[21] != 0) {
 		bonus2 = arrFields[1];
-		if (bonus2 >= 1 && bonus2 <= 18) {
+		if (bonus2 >= 0 && bonus2 <= 20) {
 			var c = document.getElementById("bonus2");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById(bonus2 + "_img");
 			ctx.drawImage(img,10,10);
 		}
+	} else {
+		var c = document.getElementById("bonus2");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("0_img");
+		ctx.drawImage(img,10,10);
 	}
+	
 	if (arrFields[4] !=0 && arrFields[14] !=0 && arrFields[24] != 0) {
 		bonus3 = arrFields[4];
-		if (bonus3 >= 1 && bonus3 <= 18) {
+		if (bonus3 >= 0 && bonus3 <= 20) {
 			var c = document.getElementById("bonus3");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById(bonus3 + "_img");
 			ctx.drawImage(img,10,10);
 		}
+	} else {
+		var c = document.getElementById("bonus3");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("0_img");
+		ctx.drawImage(img,10,10);
 	}
+	
 	if (arrFields[5] !=0 && arrFields[15] !=0 && arrFields[25] != 0) {
 		bonus4 = arrFields[15];
-		if (bonus4 >= 1 && bonus2 <= 18) {
+		if (bonus4 >= 0 && bonus2 <= 20) {
 			var c = document.getElementById("bonus4");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById(bonus4 + "_img");
 			ctx.drawImage(img,10,10);
 		}
+	} else {
+		var c = document.getElementById("bonus4");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("0_img");
+		ctx.drawImage(img,10,10);
 	}
+	
 	if (arrFields[6] !=0 && arrFields[16] !=0 && arrFields[26] != 0) {
 		bonus5 = arrFields[26];
-		if (bonus5 >= 1 && bonus5 <= 18) {
+		if (bonus5 >= 0 && bonus5 <= 20) {
 			var c = document.getElementById("bonus5");
 			var ctx = c.getContext("2d");
 			var img = document.getElementById(bonus5 + "_img");
 			ctx.drawImage(img,10,10);
 		}
+	} else {
+		var c = document.getElementById("bonus5");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("0_img");
+		ctx.drawImage(img,10,10);
 	}
+	
 	var minuspoints = 0;
 	minuspoints = (arrFields[27] * (-5)) + (arrFields[28] * (-5)) + (arrFields[29] * (-5)) + (arrFields[30] * (-5));
-	alert(redRow);
-	alert(yellowRow);
-	alert(purpleRow);
-	alert(bonus1);
-	alert(bonus2);
-	alert(bonus3);
-	alert(bonus4);
-	alert(bonus5);
-	alert(minuspoints);
+	if (minuspoints == -20) {
+		var c = document.getElementById("fehl_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("20_img");
+		ctx.drawImage(img,10,10);
+	} else if (minuspoints == -15) {
+		var c = document.getElementById("fehl_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("15_img");
+		ctx.drawImage(img,10,10);
+	} else if (minuspoints == -10) {
+		var c = document.getElementById("fehl_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("10_img");
+		ctx.drawImage(img,10,10);
+	} else if (minuspoints == -5) {
+		var c = document.getElementById("fehl_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("5_img");
+		ctx.drawImage(img,10,10);
+	} else if (minuspoints == 0) {
+		var c = document.getElementById("fehl_gesamt");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById("0_img");
+		ctx.drawImage(img,10,10);
+	}
+	
+	if (redRow > 20) {
+		alert(redRow);
+	}
+	if (yellowRow > 20) {
+		alert(yellowRow);
+	}
+	if (purpleRow > 20) {
+		alert(purpleRow);
+	}
 	endResult = redRow + yellowRow + purpleRow + bonus1 + bonus2 + bonus3 + bonus4 + bonus5 + minuspoints;
+	if (endResult >= 0 && endResult <= 20) {
+		var c = document.getElementById("summe_gesamt_2");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById(endResult + "_img");
+		ctx.drawImage(img,10,10);
+	} else if (endResult < 0) {
+		var resultvisual = -1 * endResult
+		var c = document.getElementById("summe_gesamt_2");
+		var ctx = c.getContext("2d");
+		var img = document.getElementById(resultvisual + "_img");
+		
+		ctx.drawImage(img,10,10);		
+		c = document.getElementById("summe_gesamt_1");
+		ctx = c.getContext("2d");
+		img = document.getElementById("-_img");
+		ctx.drawImage(img,10,10);
+	} else {
+		alert(endResult);
+	}
 }
 
 // Feld waehlen
