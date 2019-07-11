@@ -559,7 +559,7 @@ function calculateResult () {
 		img = document.getElementById("-_img");
 		ctx.drawImage(img,10,10);
 	} else {
-		alert(endResult);
+		alert("Dein Score: " + endResult + "!");
 	}
 }
 
