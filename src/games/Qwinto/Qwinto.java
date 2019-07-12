@@ -20,25 +20,13 @@ import userManagement.User;
 
 public class Qwinto extends Game {
 	
-	private int[] gridStatus = new int[41];
+	private int[] gridStatus = new int[85];
 	private User playerTurn = null;
 	private ArrayList<User> playerList = new ArrayList<User>();
-	private ArrayList<User> spectatorList = new ArrayList<User>();
-	private ArrayList<Board> boardList = new ArrayList<Board>();
-	private ArrayList<Field> fields;
-	private int turnCounter = 0;
-	private int fehlWuerfe = 0;
+	private ArrayList<User> spectatorList = new ArrayList<User>();	
 	private String playerLeft = null;
 	
 	
-	public ArrayList<Board> getBoardList() {
-		return boardList;
-	}
-
-	public void setBoardList(ArrayList<Board> boardList) {
-		this.boardList = boardList;
-	}
-
 	@Override
 	public String getSite() {
 		// TODO Auto-generated method stub
@@ -72,7 +60,7 @@ public class Qwinto extends Game {
 	@Override
 	public int getMaxPlayerAmount() {
 		// TODO Auto-generated method stub
-		return 6;
+		return 2;
 	}
 
 	@Override
@@ -89,15 +77,16 @@ public class Qwinto extends Game {
 		System.out.println("Execute-Methode aufgerufen mit Daten:");
 		System.out.println(user.getName() + ", " + gsonString);
 		
-		
-                if(this.gState==GameState.CLOSED) return;
-		
+		// Wenn Spiel geschlossen ist mache nichts
+        if(this.gState==GameState.CLOSED) return;
+        
+		// Wenn geschlossen werden soll, schliesse
 		if(gsonString.equals("CLOSE") && isHost(user).equals(",HOST")){
 			sendGameDataToClients("CLOSE");
 			closeGame();
 			return;
 		}
-		
+		// Wenn nicht Host schliesst, sende PLAYERLEFT
 		if(gsonString.equals("CLOSE") && isHost(user).equals(",NOTTHEHOST")) {
 			sendGameDataToClients("PLAYERLEFT");
 		}
@@ -106,7 +95,8 @@ public class Qwinto extends Game {
 			return;
 		}
 		
-		if (gsonString.equals("RESTART")) {
+		if (gsonString.equals("RESTART")&& isHost(user).equals(",NOTTHEHOST")) {
+			
 			if(gState == GameState.RUNNING) {
 				sendGameDataToClients("Cannot restart game once it was started.");
 				return;
@@ -114,38 +104,50 @@ public class Qwinto extends Game {
 		}
 		
 		if (gsonString.equals("RESTART") && isHost(user).equals(",HOST")) {;
-			if(gState == GameState.RUNNING) 
-			{
-				sendGameDataToClients("Cannot restart game once it was started.");
+		   if(playerList.size() <2) return;
+		   if(gState == GameState.RUNNING) 
+			{	
+			    setGridStatus(new int[85]);
+				this.gState= GameState.RUNNING;
+				sendGameDataToClients("standardEvent");
 				return;
 			}
 			
-			boardList.clear();
-			for(User u : playerList)
-			{
-				Board board = new Board(u);
-				board.initializeFields();
-				boardList.add(board);
+		 if(gState !=GameState.RUNNING) {
+			 return;
+		 }
+		 
+		 if(user.equals(playerTurn)) {
+		 
+		 String[] strArray = gsonString.split(",");
+			int[] receivedArray = new int[85];
+			for (int i = 0; i < 85; i++) {
+				receivedArray[i] = Integer.parseInt(strArray[i]);
 			}
+			int[] gridStatus = getGridStatus();
+			boolean changed = false;
+			for (int i = 0; i < 85; i++) {
+				if (gridStatus[i] !=  receivedArray[i]) {
+					changed = true;
+				}
+			}
+			if (changed == true) {
+				for (User u : playerList) {
+					if (!u.equals(playerTurn)) {
+						playerTurn = u;
+						break;
+					}
+			}
+				
+			setGridStatus(gridStatus);
 			
-			
-			//if there are as many players as allowed, start the game
-			if(playerList.size() == getMaxPlayerAmount() || playerList.size() >1) {
-				this.gState = GameState.RUNNING;
+				if ( gameOver()) {
+					this.gState = GameState.FINISHED;
+				}
 				sendGameDataToClients("standardEvent");
 			}
-			
+		 }
 		}
-		
-		if (gState != GameState.RUNNING)
-			return;
-		else 
-		{
-			sendGameDataToUser(user, "WrongField");
-			return;
-		}
-			
-
 	}
 	
 	private void setGridStatus(int[] gridStatus) {
@@ -159,13 +161,13 @@ public class Qwinto extends Game {
 	@Override
 	public ArrayList<User> getPlayerList() {
 		// TODO Auto-generated method stub
-		return playerList;
+		return this.playerList;
 	}
 
 	@Override
 	public ArrayList<User> getSpectatorList() {
 		// TODO Auto-generated method stub
-		return spectatorList;
+		return this.spectatorList;
 	}
 
 	@Override
@@ -180,71 +182,63 @@ public class Qwinto extends Game {
 			return "CLOSE";
 		}
 		
-		if(eventName.equals("Restart")){
-			return "Cannot restart game once it was started.";
-		}
-		if(eventName.equals("START")) {
-			return "START";
-		}
+//		if(eventName.equals("Restart")){
+//			return "Cannot restart game once it was started.";
+//		}
+//		if(eventName.equals("START")) {
+//			return "START";
+//		}
+//		
+//		if(eventName.equals("EndofGame")) {
+//			return "EndofGame";
+//		}
 		
-		if(eventName.equals("EndofGame")) {
-			return "EndofGame";
-		}
+//		if(eventName.equals("standardEvent")) {
+//			return "EndofGame";
+//		}
 		
-		if(eventName.equals("standardEvent")) {
-			return "EndofGame";
-		}
+//		if(eventName.equals("NEW_PLAYER")) {
+//			return "NEW_PLAYER" + user.getName();
+//		}
 		
-		if(eventName.equals("NEW_PLAYER")) {
-			return "NEW_PLAYER" + user.getName();
-		}
+//		if(eventName.equals("WrongField")) {
+//			return "Das Element darf hier nicht platziert werden";
+//		}
 		
-		if(eventName.equals("WrongField")) {
-			return "Das Element darf hier nicht platziert werden";
-		}
-		
-		ArrayList<Board> boardList  = getBoardList();
+		int[] grid = getGridStatus();
 
-		/*for (int i = 0; i < boardList.size(); i++) {
-			gameData += String.valueOf(boardList.get(i));
+		for (int i = 0; i < 85; i++) {
+			gameData += String.valueOf(grid[i]);
 			gameData += ',';
-		}*/
-		
-		for (int i = 0; i < boardList.size(); i++) {
-			Board board = boardList.get(i);
-			if (board.getUser().getName() == user.getName())
-			{
-				//TODO Format der Daten ist noch zu definieren
-				//gameData += String.valueOf(board.getFields());
-				gameData += ',';
-			}
 		}
 		
-		if(playerList.size() < 2){
+		if(playerList.size()<2){
 			gameData += "Warte Auf 2ten Spieler...";
 			gameData += isHost(user);
 			return gameData;
 		}
 
 		if (this.gState == GameState.FINISHED) {
-			if (fehlWuerfe == 4){
-				gameData += "Unentschieden!";
+			if (gameOver()){
+				if(grid[40]<grid[81]) {
+					gameData += "Player 2 wins!";
+				}else if (grid[40]>grid[81]) {
+					gameData += "Player 1 wins!";
+				}else {
+					gameData += "Unentschieden";
+				}
 				gameData += isHost(user);
 				return gameData;
-			}
-			
-			
-			//TODO Fall betrachten, wenn es nicht unentschieden ist
-		}
+			 }else if (playerTurn.equals(user)) {
+		     	gameData += user.getName() +" ist dran!";}
 
-
-		if (playerList.indexOf(user) == 0)
-			gameData += " (x)";
-		else
-			gameData += " (o)";
+		     }
+//		if (playerList.indexOf(user) == 0)
+//			gameData += " (x)";
+//		else
+//			gameData += " (o)";
 		
-		gameData += isHost(user);
-
+//		gameData += isHost(user);
 		return gameData;
 		
 	}
@@ -253,18 +247,19 @@ public class Qwinto extends Game {
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
-		if (playerList.size() < 6 && !playerList.contains(user)) {
+		if (playerList.size() < 2 && !playerList.contains(user)) {
 			playerList.add(user);
-
-			if (playerTurn == null) {
-				playerTurn = user;
-			}
-			sendGameDataToClients("START");
-		}
-		if (playerList.size() == 2) {
 			this.gState = GameState.RUNNING;
+            playerTurn = playerList.get(0);
+            sendGameDataToClients("START");
+           
+		}else if(playerList.size() >= 2 && !playerList.contains(user)) {
+			playerList.add(user);
 			sendGameDataToClients("START");
+			
+				
 		}
+
 	}
 
 	@Override
@@ -275,7 +270,7 @@ public class Qwinto extends Game {
 
 	@Override
 	public boolean isJoinable() {
-		if(playerList.size() < 6) {
+		if(playerList.size() < 2) {
 			return true;
 		}else {
 		return false;}
@@ -288,50 +283,7 @@ public class Qwinto extends Game {
 		sendGameDataToClients("PLAYERLEFT");
 	}
 
-	public String getGameState(String eventName, User user) {
-		// TODO Auto-generated method stub
-		String gameData = "";
-		if(eventName.equals("PLAYERLEFT")){
-			return playerLeft + " hat das Spiel verlassen!";
-		}
-		if(eventName.equals("CLOSE")){
-			return "CLOSE";
-		}
-		
-		int[] grid = getGridStatus();
 
-		for (int i = 0; i < 41; i++) {
-			gameData += String.valueOf(grid[i]);
-			gameData += ',';
-		}
-		
-		if(playerList.size()<2){
-			gameData += "Warte auf 2ten Spieler...";
-			gameData += isHost(user);
-			return gameData;
-		}
-
-		if (this.gState == GameState.FINISHED) {
-			if (turnCounter == 27 && !gameOver()){
-				//Punkte auswertung
-				gameData += "Unentschieden!";
-				gameData += isHost(user);
-				return gameData;
-			}
-			if (playerTurn.equals(user)) {
-				gameData += "Du hast verloren!";
-			} else
-				gameData += "Du hast gewonnen!";
-		}else if (playerTurn.equals(user)) {
-			gameData += "Du bist dran!";
-		} else {
-			gameData += playerTurn.getName() + " ist dran!";
-		}
-		
-		gameData += isHost(user);
-
-		return gameData;
-	}
 	@Override
 	public GameState getGameState() {
 		return this.gState;
@@ -340,12 +292,14 @@ public class Qwinto extends Game {
 	public boolean gameOver() {
 		boolean end=false;
 		int[] grid = getGridStatus();
+		
 		// Wenn Orangefarbene und gelbe Zeile voll ist
 		for(int i=0; grid[i]!=0 && i<9;i++) {
-			for(int j=9; grid[j]!=0 && j<18;j++) {
-				if(j==17) {
-				end=true;
+				for(int j=9; grid[j]!=0 && j<18;j++) {
+					if(j==17) {
+						end=true;
 				}
+			
 			}
 		}
 		// Wenn Gelbfarbene und lila Zeile voll ist
@@ -366,11 +320,8 @@ public class Qwinto extends Game {
 		}
 
 		// Wenn Fehlerwurf Zeile voll ist
-		for(int i=27; grid[i]!=0 && i<31;i++) {	
-				if(i==30) {
-				end=true;
-				}
-			
+		if(grid[31]==4) {					
+				end=true;			
 		}
 		
 		
